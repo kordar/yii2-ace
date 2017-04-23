@@ -1,5 +1,5 @@
 <?php
-namespace kordar\ace\libs\tree;
+namespace kordar\ace\tree;
 
 class ArrayToTree
 {

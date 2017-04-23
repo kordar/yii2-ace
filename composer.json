@@ -22,7 +22,7 @@
     },
     "autoload": {
         "psr-4": {
-            "kordar\\ace\\": "src/"
+            "kordar\\ace\\": "src/libs/"
         }
     },
 	"extra": {
