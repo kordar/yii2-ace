@@ -18,7 +18,7 @@
         "source": "https://github.com/kordar/yii2-ace"
     },
     "require": {
-		"yiisoft/yii2-bootstrap": "*",
+		"yiisoft/yii2-bootstrap": "*"
     },
     "autoload": {
         "psr-4": {
