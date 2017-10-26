@@ -1,37 +1,21 @@
 {
-	"name": "kordar/yii2-ace",
-    "description": "yii2 ace",
-	"keywords": [  
-		"yii2",  
-		"ace admin"
-	  ],  
+    "name": "ace/kordar-ace",
+    "description": "ace admin",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
     "authors": [
         {
-            "name": "kongdehui",
+            "name": "perpel",
             "email": "572821520@qq.com"
         }
     ],
-	"homepage": "https://github.com/kordar/yii2-ace",
-    "type": "yii2-extension",
-    "license": "MIT",
-    "support": {
-        "source": "https://github.com/kordar/yii2-ace"
-    },
     "require": {
-		"yiisoft/yii2-bootstrap": "*"
+        "yiisoft/yii2": "*"
     },
     "autoload": {
         "psr-4": {
-            "kordar\\ace\\": "src/libs/"
-        }
-    },
-	"extra": {
-        "branch-alias": {
-            "dev-master": "1.0.0-dev"
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
+            "kordar\\ace\\": ""
         }
     }
 }

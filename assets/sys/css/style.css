@@ -1,0 +1,30 @@
+.fontawesome-icon-list {
+    margin-top: 22px;
+}
+
+.fontawesome-icon-list .fa-hover a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    color: #222;
+    line-height: 32px;
+    height: 32px;
+    padding-left: 10px;
+    border-radius: 4px;
+}
+
+.fontawesome-icon-list .fa-hover a:hover {
+    background-color: #1d9d74;
+    color: #fff;
+    text-decoration: none;
+}
+
+.well-checkbox label {
+    margin-right: 5px;
+}
+
+.well-checkbox hr {
+    border: dashed 1px;
+    margin: 8px 0px;
+}
