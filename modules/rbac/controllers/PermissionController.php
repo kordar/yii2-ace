@@ -2,13 +2,11 @@
 
 namespace kordar\ace\modules\rbac\controllers;
 
+use kordar\ace\controllers\AceController;
 use Yii;
 use kordar\ace\modules\rbac\models\AuthItem;
 use kordar\ace\modules\rbac\models\AuthItemSearch;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-
 
 /**
  * @item *:权限管理
@@ -22,22 +20,8 @@ use yii\filters\VerbFilter;
 /**
  * PermissionController implements the CRUD actions for AuthItem model.
  */
-class PermissionController extends Controller
+class PermissionController extends AceController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     /**
      * Lists all AuthItem models.

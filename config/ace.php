@@ -72,6 +72,11 @@ return [
             'errorAction' => 'ace/default/error',
         ],
 
+    ],
+
+    'params' => [
+        'activeDownList' => ['否', '是'],
+        'authKeys' => []
     ]
 
 ];

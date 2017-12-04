@@ -35,6 +35,11 @@ class DefaultController extends AceController
         return $this->render('icons');
     }
 
+    public function actionEnv()
+    {
+        return $this->render('env');
+    }
+
     public function actionError()
     {
     }

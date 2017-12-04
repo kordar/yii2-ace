@@ -16,6 +16,7 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $auth_key
  * @property integer $status
+ * @property integer $type
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
@@ -25,6 +26,7 @@ class Admin extends Ace implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    const TYPE_SUPER = 9;
 
     /**
      * @inheritdoc
@@ -123,6 +125,14 @@ class Admin extends Ace implements IdentityInterface
     public function getId()
     {
         return $this->getPrimaryKey();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function super()
+    {
+        return $this->type == self::TYPE_SUPER;
     }
 
     /**

@@ -2,10 +2,8 @@
 namespace kordar\ace\controllers;
 
 use kordar\ace\filter\RbacFilter;
-use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\web\HttpException;
 
 /**
  *  controller for the `ace` module
@@ -24,6 +22,7 @@ class AceController extends Controller
         return [
             'access' => [
                 'class' => \yii\filters\AccessControl::className(),
+                // 'user' => 'user',
                 'only' => $this->actions,
                 'except' => $this->except,
                 'rules' => [

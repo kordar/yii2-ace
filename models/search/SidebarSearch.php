@@ -19,7 +19,7 @@ class SidebarSearch extends Sidebar
     {
         return [
             [['id', 'parent_id', 'active', 'sort', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'href', 'language', 'icon'], 'safe'],
+            [['title', 'href', 'language', 'icon', 'hidden'], 'safe'],
         ];
     }
 

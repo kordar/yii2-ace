@@ -48,7 +48,7 @@ class ArrayToTree
             $this->setParentActive($arr, $activeID);
 
             foreach ($arr as $item) {
-                if ($item['hidden'] == 0) {
+                if (isset($item['hidden']) && $item['hidden'] == 0) {
 
                     if (empty($item['href'])) {
                         $this->levelTree[$item[$parentKey]][] = $item;
