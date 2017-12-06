@@ -12,6 +12,7 @@ class AceController extends Controller
 {
     protected $actions = ['*'];
     protected $except = [];
+    protected $rabcExcept = [];
     protected $mustlogin = [];
     protected $verbs = [
         'delete' => ['POST']
@@ -43,7 +44,8 @@ class AceController extends Controller
                 'actions' => $this->verbs,
             ],
             'rbac' => [
-                'class' => RbacFilter::className()
+                'class' => RbacFilter::className(),
+                'except' => $this->rabcExcept,
             ]
         ];
     }

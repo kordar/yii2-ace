@@ -12,6 +12,8 @@ namespace kordar\ace\controllers;
 class DefaultController extends AceController
 {
 
+    protected $rabcExcept = ['error'];
+
     public function actions()
     {
         return [

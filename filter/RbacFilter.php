@@ -7,6 +7,7 @@ use yii\web\HttpException;
 
 class RbacFilter extends ActionFilter
 {
+    public $except = [];
 
     public function beforeAction($action)
     {
@@ -14,9 +15,15 @@ class RbacFilter extends ActionFilter
             return false;
         }
 
+        $actionName = $action->id;
+
+        if (in_array($actionName, $this->except)) {
+            return true;
+        }
+
         $module = $action->controller->module->id;
         $controller = $action->controller->id;
-        $actionName = $action->id;
+
 
         $prefix = $module == 'basic' ? $controller : $module . '/' . $controller;
 

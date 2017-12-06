@@ -24,6 +24,8 @@ class AuthController extends AceController
 
     protected $except = ['login', 'signup', 'request-password-reset', 'reset-password'];
 
+    protected $rabcExcept = ['login'];
+
     /**
      * Login action.
      *
