@@ -20,7 +20,7 @@ AttestAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class='login-layout'>
+<body class='login-layout' style="background-image: url('/images/bg2.jpg'); background-repeat: no-repeat; background-size: cover">
 <?php $this->beginBody() ?>
 
 <div class="main-container">

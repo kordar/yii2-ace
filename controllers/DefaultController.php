@@ -7,6 +7,7 @@ namespace kordar\ace\controllers;
  * @item *:网站管理
  * @item index:管理首页
  * @item icons:Icon列表
+ * @item env:PHP环境
  * @item error:异常页面
  */
 class DefaultController extends AceController

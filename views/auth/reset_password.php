@@ -55,7 +55,7 @@ $this->title = '密码重置';
 
             <?= Html::a(
                 "<i class=\"ace-icon fa fa-arrow-left\"></i>\n返回登录",
-                ['site/login'],
+                ['auth/login'],
                 ['class'=>'back-to-login-link']
             ) ?>
 

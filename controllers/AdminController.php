@@ -2,8 +2,8 @@
 
 namespace kordar\ace\controllers;
 
-use kordar\ace\models\Assignment;
 use Yii;
+use kordar\ace\models\Assignment;
 use kordar\ace\models\Admin;
 use kordar\ace\models\search\AdminSearch;
 use yii\web\NotFoundHttpException;

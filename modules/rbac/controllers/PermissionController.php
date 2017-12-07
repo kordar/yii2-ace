@@ -2,8 +2,8 @@
 
 namespace kordar\ace\modules\rbac\controllers;
 
-use kordar\ace\controllers\AceController;
 use Yii;
+use kordar\ace\controllers\AceController;
 use kordar\ace\modules\rbac\models\AuthItem;
 use kordar\ace\modules\rbac\models\AuthItemSearch;
 use yii\web\NotFoundHttpException;

@@ -34,13 +34,7 @@ $assetObj = AppAsset::register($this);
             try{ace.settings.loadState('main-container')}catch(e){}
         </script>
 
-        <?php
-        /**
-         * side bar
-         */
-         echo  \kordar\ace\widgets\Sidebar::widget([
-             'tree' => \kordar\ace\models\Sidebar::find()->indexBy('id')->orderBy('sort DESC')->asArray()->all()]);
-        ?>
+        <?php echo \kordar\ace\widgets\Sidebar::widget();?>
 
         <div class="main-content">
 

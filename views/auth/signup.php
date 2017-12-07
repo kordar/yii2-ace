@@ -78,7 +78,7 @@ $this->title = '注册用户';
 
             <?= Html::a(
                 "<i class=\"ace-icon fa fa-arrow-left\"></i>\n返回登录",
-                ['site/login'],
+                ['auth/login'],
                 ['class'=>'back-to-login-link']
             ) ?>
 

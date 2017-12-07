@@ -2,6 +2,7 @@
 namespace kordar\ace\widgets;
 
 use BlueM\Tree;
+use kordar\ace\libs\GenerateTreeByArray;
 use yii\base\Widget;
 use yii\helpers\Html;
 
@@ -11,6 +12,11 @@ class Sidebar extends Widget
 
     public function run()
     {
+        $this->tree = \kordar\ace\models\Sidebar::find()->indexBy('id')->orderBy('sort DESC')->asArray()->all();
+
+        $group = GenerateTreeByArray::getGroup($this->tree);
+        var_dump($group);die;
+
         $obj = new \kordar\ace\libs\tree\ArrayToTree($this->tree);
 
         $sideBarTree = new SidebarSplTree(new \kordar\ace\libs\tree\MenuIterator($obj->tree), \RecursiveIteratorIterator::SELF_FIRST);
