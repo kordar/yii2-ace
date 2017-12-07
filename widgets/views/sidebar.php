@@ -40,3 +40,5 @@
     </div>
 
 </div>
+
+<?php $this->registerJs('$(\'#sidebar li.active\').parents(\'li\').addClass(\'active open\')'); ?>

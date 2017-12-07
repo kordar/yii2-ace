@@ -23,10 +23,29 @@ return [
             'loginUrl' => ['/ace/auth/login'],
         ],
 
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'toomee-redis',
+            'port' => 6379,
+            'database' => 0,
+        ],
+
         # session 基本配置
         'session' => [
             // this is the name of the session cookie used for login on the backend
-            'name' => 'ace-admin',
+            'class'=>'yii\redis\Session',
+            //'timeout'=>3600,
+            /*'keyPrefix'=>'qian',
+            'cookieParams' => [
+                'path' => '/',
+                'domain' => ".qian.com",
+            ],*/
+            'redis' => [
+                'class' => 'yii\redis\Connection',
+                'hostname' => 'toomee-redis',
+                'port' => 6379,
+                'database' => 1,
+            ],
         ],
 
         'authManager' => [
