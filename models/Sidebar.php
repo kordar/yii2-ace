@@ -3,7 +3,9 @@
 namespace kordar\ace\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
+use kordar\ace\helper\SidebarHelper;
+use kordar\ace\libs\tree\GenerateTreeByArray;
+use yii\behaviors\BlameableBehavior;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -29,14 +31,24 @@ class Sidebar extends Ace
         return '{{%sidebar}}';
     }
 
+    public $parent;
+
+    /**
+     * @inheritdoc
+     */
     /**
      * @inheritdoc
      */
     public function behaviors()
     {
-        return [
-            TimestampBehavior::className(),
+        $behaviors = parent::behaviors();
+        $behaviors[] = [
+            'class' => BlameableBehavior::className(),
+            'createdByAttribute' => 'language',
+            'updatedByAttribute' => 'language',
+            'value' => Yii::$app->language
         ];
+        return $behaviors;
     }
 
     /**
@@ -61,18 +73,18 @@ class Sidebar extends Ace
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'title' => '菜单名',
-            'href' => '链接',
-            'parent_id' => '上级菜单',
-            'language' => 'Language',
-            'sort' => '排序',
-            'icon' => '图标',
-            'active' => '默认活动',
-            'hidden' => '隐藏项',
-            'status' => 'set the sidebar status, the default 1 is active',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'id' => Yii::t('ace.sidebar', 'ID'),
+            'title' => Yii::t('ace.sidebar', 'Title'),
+            'href' => Yii::t('ace.sidebar', 'Href'),
+            'parent_id' => Yii::t('ace.sidebar', 'ParentID'),
+            'language' => Yii::t('ace.sidebar', 'Language'),
+            'sort' => Yii::t('ace.sidebar', 'Sort'),
+            'icon' => Yii::t('ace.sidebar', 'Icon'),
+            'active' => Yii::t('ace.sidebar', 'Active'),
+            'hidden' => Yii::t('ace.sidebar', 'Hidden'),
+            'status' => Yii::t('ace.sidebar', 'Status'),
+            'created_at' => Yii::t('ace.sidebar', 'CreatedAt'),
+            'updated_at' => Yii::t('ace.sidebar', 'UpdatedAt'),
         ];
     }
 
@@ -80,6 +92,19 @@ class Sidebar extends Ace
     {
         $data = self::find()->select(['id', 'title'])->where(['hidden'=>0])->asArray()->all();
         return ArrayHelper::merge([0=>'无'], ArrayHelper::map($data, 'id', 'title'));
+    }
+
+    // 设置 Tree
+    static public function sidebarTree()
+    {
+        $data = self::find()->indexBy('id')->orderBy('sort DESC')->where(['language'=>Yii::$app->language])->asArray()->all();
+        $group = new GenerateTreeByArray();
+        return SidebarHelper::setTree($group->tree($data));
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(self::className(), ['id' => 'parent_id']);
     }
 
 }

@@ -110,4 +110,23 @@ class SidebarController extends AceController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function beforeAction($action)
+    {
+        $rs = parent::beforeAction($action);
+        if ($rs && in_array($action->id, ['create', 'update', 'delete'])) {
+            $this->on('GENERATE_SIDE_BAR', ['\kordar\ace\models\Sidebar', 'sidebarTree']);
+        }
+        return $rs;
+    }
+
+    public function afterAction($action, $result)
+    {
+        $rs = parent::afterAction($action, $result);
+        if ($rs && in_array($action->id, ['create', 'update', 'delete'])) {
+            $this->trigger('GENERATE_SIDE_BAR');
+        }
+        return $rs;
+    }
+
 }

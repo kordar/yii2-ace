@@ -2,21 +2,25 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use kordar\ace\helper\DetailViewHelper;
 
 /* @var $this yii\web\View */
 /* @var $model kordar\ace\models\Sidebar */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sidebars'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ace', 'Sidebars'), 'url' => ['index'], 'icon'=>'fa-list'];
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'icon'=>'fa-eye'];
+
+$this->params['link'] = 'ace/sidebar/index';
+
 ?>
 <div class="sidebar-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('yii', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('yii', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
@@ -31,15 +35,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'href',
-            'parent_id',
+            [
+                'attribute' => 'parent_id',
+                'value' => function ($model) {
+                    return $model->parent->title;
+                }
+            ],
             'language',
-            'icon',
-            'active',
+            DetailViewHelper::fontAwesomeIcon($model->icon, 'icon'),
+            DetailViewHelper::active($model->active, 'active'),
             'sort',
-            'status',
-            'created_at',
-            'updated_at',
+            DetailViewHelper::status($model->status, 'status'),
+            'created_at:datetime',
+            'updated_at:datetime',
         ],
+
     ]) ?>
 
 </div>

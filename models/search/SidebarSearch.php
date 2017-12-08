@@ -57,6 +57,9 @@ class SidebarSearch extends Sidebar
             return $dataProvider;
         }
 
+        $query->select('{{%sidebar}}.*, sidebar2.title AS parent')
+              ->leftJoin('{{%sidebar}} as sidebar2', '`sidebar2`.`id` = {{%sidebar}}.`parent_id`');
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

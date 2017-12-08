@@ -4,6 +4,7 @@
 
 use kordar\ace\AppAsset;
 use yii\helpers\Html;
+use kordar\ace\helper\SidebarHelper;
 
 $assetObj = AppAsset::register($this);
 
@@ -22,11 +23,7 @@ $assetObj = AppAsset::register($this);
 <body class="no-skin">
 <?php $this->beginBody() ?>
 
-    <?php
-
-    echo \kordar\ace\widgets\Navbar::widget(['baseUrl'=>$assetObj->baseUrl]);
-
-    ?>
+    <?= \kordar\ace\widgets\Navbar::widget(['baseUrl'=>$assetObj->baseUrl]);?>
 
     <div class="main-container ace-save-state" id="main-container">
 
@@ -34,7 +31,10 @@ $assetObj = AppAsset::register($this);
             try{ace.settings.loadState('main-container')}catch(e){}
         </script>
 
-        <?php echo \kordar\ace\widgets\Sidebar::widget();?>
+        <?= \kordar\ace\widgets\Sidebar::widget([
+            'link'=> empty($this->params['link']) ? SidebarHelper::linker() : $this->params['link'],
+            'tree'=> SidebarHelper::getTree()
+        ]);?>
 
         <div class="main-content">
 

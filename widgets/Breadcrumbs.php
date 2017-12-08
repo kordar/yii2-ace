@@ -137,7 +137,7 @@ class Breadcrumbs extends Widget
         if ($this->homeLink === null) {
             $links[] = $this->renderItem([
                 'label' => Yii::t('yii', 'Home'),
-                'cls' => 'fa-home home-icon',
+                'icon' => 'fa-home home-icon',
                 'url' => Yii::$app->homeUrl,
             ], $this->itemTemplate);
         } elseif ($this->homeLink !== false) {
@@ -162,7 +162,7 @@ class Breadcrumbs extends Widget
     protected function renderItem($link, $template)
     {
         $encodeLabel = ArrayHelper::remove($link, 'encode', $this->encodeLabels);
-        $i = array_key_exists('cls', $link) ? Html::tag('i', '', ['class'=>'ace-icon fa ' . $link['cls']]) : '';
+        $i = array_key_exists('icon', $link) ? Html::tag('i', '', ['class'=>'ace-icon fa ' . $link['icon']]) : '';
         if (array_key_exists('label', $link)) {
             $label = $encodeLabel ? Html::encode($link['label']) : $link['label'];
         } else {
@@ -173,7 +173,7 @@ class Breadcrumbs extends Widget
         }
         if (isset($link['url'])) {
             $options = $link;
-            unset($options['template'], $options['label'], $options['url'], $options['cls']);
+            unset($options['template'], $options['label'], $options['url'], $options['icon']);
             $link = Html::a($label, $link['url'], $options);
         } else {
             $link = $label;

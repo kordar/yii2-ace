@@ -18,8 +18,10 @@ class GenerateTreeByArray
     protected function setGroup($list = array())
     {
         foreach ($list as $item) {
-            $keyNode = $item['parent_id'];
-            $this->groups[$keyNode][] = $item;
+            if ($item['hidden'] == 0) {
+                $keyNode = $item['parent_id'];
+                $this->groups[$keyNode][] = $item;
+            }
         }
     }
 

@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel kordar\ace\models\search\SidebarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Sidebars');
+$this->title = Yii::t('ace', 'Sidebars');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sidebar-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Sidebar'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('ace.sidebar', 'Create Sidebar'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'href',
-            'parent_id',
+            'parent',
             'hidden',
             // 'language',
             // 'icon',
