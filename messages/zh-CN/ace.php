@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Sidebars' => '菜单列表',
+    'Menus' => '菜单列表',
 
     'Activating' => '激活中',
     'Not Activated' => '未激活',

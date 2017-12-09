@@ -26,4 +26,15 @@ class RedisHelper
         $redis->database = self::$database;
         return $redis->setex($key, $ttl, $data);
     }
+
+    static public function set($key, $data)
+    {
+        /**
+         * @var \yii\redis\Connection $redis
+         */
+        $redis = Yii::$app->redis;
+        $redis->database = self::$database;
+        return $redis->set($key, $data);
+    }
+
 }

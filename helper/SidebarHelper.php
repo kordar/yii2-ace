@@ -10,7 +10,7 @@ class SidebarHelper implements EventInterface
     {
         RedisHelper::$database = 10;
         $key = EventInterface::USER_SIDEBAR_REDIS_KEY;
-        return RedisHelper::setEx($key, EventInterface::USER_SIDEBAR_REDIS_KEY_TIMEOUT, serialize($tree));
+        return RedisHelper::set($key, serialize($tree));
     }
 
     static public function getTree()

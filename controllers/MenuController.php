@@ -2,13 +2,14 @@
 
 namespace kordar\ace\controllers;
 
+use kordar\ace\models\menu\Menu;
 use Yii;
-use kordar\ace\models\Sidebar;
-use kordar\ace\models\search\SidebarSearch;
+use kordar\ace\models\menu\MenuView;
+use kordar\ace\models\menu\MenuSearch;
 use yii\web\NotFoundHttpException;
 
 /**
- * SidebarController implements the CRUD actions for Sidebar model.
+ * MenuController implements the CRUD actions for MenuView model.
  * @item *:菜单管理
  * @item create:创建菜单
  * @item delete:删除菜单
@@ -16,15 +17,16 @@ use yii\web\NotFoundHttpException;
  * @item index:菜单列表
  * @item view:菜单详情
  */
-class SidebarController extends AceController
+
+class MenuController extends AceController
 {
     /**
-     * Lists all Sidebar models.
+     * Lists all MenuView models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new SidebarSearch();
+        $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -34,25 +36,25 @@ class SidebarController extends AceController
     }
 
     /**
-     * Displays a single Sidebar model.
+     * Displays a single MenuView model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findViewModel($id),
         ]);
     }
 
     /**
-     * Creates a new Sidebar model.
+     * Creates a new MenuView model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Sidebar();
+        $model = new Menu();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -64,7 +66,7 @@ class SidebarController extends AceController
     }
 
     /**
-     * Updates an existing Sidebar model.
+     * Updates an existing MenuView model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -83,7 +85,7 @@ class SidebarController extends AceController
     }
 
     /**
-     * Deletes an existing Sidebar model.
+     * Deletes an existing MenuView model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -96,26 +98,36 @@ class SidebarController extends AceController
     }
 
     /**
-     * Finds the Sidebar model based on its primary key value.
+     * Finds the MenuView model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Sidebar the loaded model
+     * @return MenuView the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Sidebar::findOne($id)) !== null) {
+        if (($model = Menu::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
+    protected function findViewModel($id)
+    {
+        if (($model = MenuView::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+
     public function beforeAction($action)
     {
         $rs = parent::beforeAction($action);
         if ($rs && in_array($action->id, ['create', 'update', 'delete'])) {
-            $this->on('GENERATE_SIDE_BAR', ['\kordar\ace\models\Sidebar', 'sidebarTree']);
+            $this->on('GENERATE_SIDE_BAR', ['\kordar\ace\models\menu\Menu', 'sidebarTree']);
         }
         return $rs;
     }
@@ -128,5 +140,6 @@ class SidebarController extends AceController
         }
         return $rs;
     }
+
 
 }

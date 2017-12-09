@@ -8,10 +8,10 @@ use kordar\ace\helper\DetailViewHelper;
 /* @var $model kordar\ace\models\Sidebar */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('ace', 'Sidebars'), 'url' => ['index'], 'icon'=>'fa-list'];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ace.menu', 'Menus'), 'url' => ['index'], 'icon'=>'fa-list'];
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon'=>'fa-eye'];
 
-$this->params['link'] = 'ace/sidebar/index';
+$this->params['link'] = 'ace/menu/index';
 
 ?>
 <div class="sidebar-view">
@@ -35,12 +35,7 @@ $this->params['link'] = 'ace/sidebar/index';
             'id',
             'title',
             'href',
-            [
-                'attribute' => 'parent_id',
-                'value' => function ($model) {
-                    return $model->parent->title;
-                }
-            ],
+            'parent_title',
             'language',
             DetailViewHelper::fontAwesomeIcon($model->icon, 'icon'),
             DetailViewHelper::active($model->active, 'active'),

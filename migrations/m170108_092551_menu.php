@@ -2,9 +2,9 @@
 
 use yii\db\Migration;
 
-class m170108_092551_sidebar extends Migration
+class m170108_092551_menu extends Migration
 {
-    const TABLE = '{{%sidebar}}';
+    const TABLE = '{{%menu}}';
 
     public function up()
     {
@@ -29,6 +29,18 @@ class m170108_092551_sidebar extends Migration
             'updated_at' => $this->integer()->notNull(),
 
         ], $tableOptions);
+
+        $table = self::TABLE;
+        $view = '{{%menu_view}}';
+        $sql = <<<SQL
+          CREATE VIEW $view AS 
+          SELECT $table.*, `menu2`.`parent_title` 
+            FROM $table LEFT JOIN 
+              (SELECT `title` AS `parent_title`, `id` FROM $table) `menu2` 
+              ON `menu2`.`id` = `parent_id`;
+SQL;
+        $this->db->createCommand($sql)->execute();
+
     }
 
     public function down()

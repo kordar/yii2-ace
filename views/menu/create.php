@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model kordar\ace\models\Sidebar */
 
-$this->title = Yii::t('app', 'Create Sidebar');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Sidebars'), 'url' => ['index']];
+$this->title = Yii::t('ace.menu', 'Create Menu');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ace.menu', 'Menus'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sidebar-create">

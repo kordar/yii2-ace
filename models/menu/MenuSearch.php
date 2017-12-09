@@ -1,16 +1,16 @@
 <?php
 
-namespace kordar\ace\models\search;
+namespace kordar\ace\models\menu;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use kordar\ace\models\Sidebar;
+use kordar\ace\models\menu\MenuView;
 
 /**
- * SidebarSearch represents the model behind the search form about `kordar\ace\models\Sidebar`.
+ * MenuSearch represents the model behind the search form about `kordar\ace\models\menu\MenuView`.
  */
-class SidebarSearch extends Sidebar
+class MenuSearch extends MenuView
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class SidebarSearch extends Sidebar
     public function rules()
     {
         return [
-            [['id', 'parent_id', 'active', 'sort', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'href', 'language', 'icon', 'hidden', 'parent_title'], 'safe'],
+            [['id', 'parent_id', 'active', 'sort', 'status', 'hidden', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'href', 'language', 'icon', 'parent_title'], 'safe'],
         ];
     }
 
@@ -41,8 +41,7 @@ class SidebarSearch extends Sidebar
      */
     public function search($params)
     {
-        $subQuery = (new \yii\db\Query())->select(['title AS parent_title', 'id'])->from(self::tableName());
-        $query = Sidebar::find()->select(['{{%sidebar}}.*', 'sidebar2.parent_title'])->leftJoin(['sidebar2' => $subQuery], '`sidebar2`.`id` = `parent_id`');
+        $query = MenuView::find();
 
         // add conditions that should always apply here
 
@@ -58,8 +57,6 @@ class SidebarSearch extends Sidebar
             return $dataProvider;
         }
 
-
-
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -67,6 +64,7 @@ class SidebarSearch extends Sidebar
             'active' => $this->active,
             'sort' => $this->sort,
             'status' => $this->status,
+            'hidden' => $this->hidden,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
@@ -74,8 +72,8 @@ class SidebarSearch extends Sidebar
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'href', $this->href])
             ->andFilterWhere(['like', 'language', $this->language])
-            ->andFilterWhere(['like', 'parent_title', $this->parent_title])
-            ->andFilterWhere(['like', 'icon', $this->icon]);
+            ->andFilterWhere(['like', 'icon', $this->icon])
+            ->andFilterWhere(['like', 'parent_title', $this->parent_title]);
 
         return $dataProvider;
     }
