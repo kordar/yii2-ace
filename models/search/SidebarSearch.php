@@ -19,7 +19,7 @@ class SidebarSearch extends Sidebar
     {
         return [
             [['id', 'parent_id', 'active', 'sort', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'href', 'language', 'icon', 'hidden'], 'safe'],
+            [['title', 'href', 'language', 'icon', 'hidden', 'parent_title'], 'safe'],
         ];
     }
 
@@ -41,7 +41,8 @@ class SidebarSearch extends Sidebar
      */
     public function search($params)
     {
-        $query = Sidebar::find();
+        $subQuery = (new \yii\db\Query())->select(['title AS parent_title', 'id'])->from(self::tableName());
+        $query = Sidebar::find()->select(['{{%sidebar}}.*', 'sidebar2.parent_title'])->leftJoin(['sidebar2' => $subQuery], '`sidebar2`.`id` = `parent_id`');
 
         // add conditions that should always apply here
 
@@ -57,8 +58,7 @@ class SidebarSearch extends Sidebar
             return $dataProvider;
         }
 
-        $query->select('{{%sidebar}}.*, sidebar2.title AS parent')
-              ->leftJoin('{{%sidebar}} as sidebar2', '`sidebar2`.`id` = {{%sidebar}}.`parent_id`');
+
 
         // grid filtering conditions
         $query->andFilterWhere([
@@ -74,6 +74,7 @@ class SidebarSearch extends Sidebar
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'href', $this->href])
             ->andFilterWhere(['like', 'language', $this->language])
+            ->andFilterWhere(['like', 'parent_title', $this->parent_title])
             ->andFilterWhere(['like', 'icon', $this->icon]);
 
         return $dataProvider;

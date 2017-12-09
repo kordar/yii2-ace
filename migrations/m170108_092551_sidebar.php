@@ -27,6 +27,7 @@ class m170108_092551_sidebar extends Migration
             'hidden' => $this->smallInteger()->notNull()->defaultValue(0)->comment('是否隐藏项'),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
+
         ], $tableOptions);
     }
 

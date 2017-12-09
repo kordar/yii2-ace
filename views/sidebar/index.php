@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'href',
-            'parent',
+            'parent_title',
             'hidden',
             // 'language',
             // 'icon',

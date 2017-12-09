@@ -23,6 +23,8 @@ use yii\helpers\ArrayHelper;
  */
 class Sidebar extends Ace
 {
+    public $parent_title;
+
     /**
      * @inheritdoc
      */
@@ -30,8 +32,6 @@ class Sidebar extends Ace
     {
         return '{{%sidebar}}';
     }
-
-    public $parent;
 
     /**
      * @inheritdoc
@@ -77,6 +77,7 @@ class Sidebar extends Ace
             'title' => Yii::t('ace.sidebar', 'Title'),
             'href' => Yii::t('ace.sidebar', 'Href'),
             'parent_id' => Yii::t('ace.sidebar', 'ParentID'),
+            'parent_title' => Yii::t('ace.sidebar', 'Parent Title'),
             'language' => Yii::t('ace.sidebar', 'Language'),
             'sort' => Yii::t('ace.sidebar', 'Sort'),
             'icon' => Yii::t('ace.sidebar', 'Icon'),
