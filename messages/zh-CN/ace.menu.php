@@ -15,7 +15,11 @@ return [
     'Created At' => '创建时间',
     'Updated At' => '更新时间',
 
+    //
     'Menus' => '菜单列表',
     'Create Menu' => '创建菜单项',
     'Update Menu' => '更新菜单项',
+
+    //
+    'Please choose superior menu' => '请选择上级菜单'
 ];

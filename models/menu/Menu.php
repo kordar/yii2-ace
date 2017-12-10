@@ -84,18 +84,12 @@ class Menu extends Ace
         ];
     }
 
-    public function sidebarList()
-    {
-        return self::setSidebarList();
-        $data = self::find()->select(['id', 'title'])->where(['hidden'=>0])->asArray()->all();
-        return ArrayHelper::merge([0=>'无'], ArrayHelper::map($data, 'id', 'title'));
-    }
-
     // 设置 Tree
     static public function sidebarTree()
     {
         $data = self::find()->indexBy('id')->orderBy('sort DESC')->where(['language'=>Yii::$app->language])->asArray()->all();
         $group = new GenerateTreeByArray();
+        self::setSidebarList();
         return SidebarHelper::setTree($group->tree($data));
     }
 
@@ -105,12 +99,12 @@ class Menu extends Ace
         $group = new GenerateTreeByArray();
         $tree = $group->tree($data);
         $sideBarTree = new \RecursiveIteratorIterator(new MenuIterator($tree), \RecursiveIteratorIterator::SELF_FIRST);
-        $list = [0 => ' 无'];
+        $list = [];
         foreach ($sideBarTree as $item) {
             $prefix = str_repeat('　', $sideBarTree->getDepth()) . '┗';
             $list[$item['id']] = $prefix . ' ' . $item['title'];
         }
-        return $list;
+        return SidebarHelper::setSidebarDropDownList($list);
     }
 
 }

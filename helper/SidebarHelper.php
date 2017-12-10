@@ -13,6 +13,21 @@ class SidebarHelper implements EventInterface
         return RedisHelper::set($key, serialize($tree));
     }
 
+    static public function setSidebarDropDownList($dropDownList = [])
+    {
+        RedisHelper::$database = 10;
+        $key = EventInterface::USER_SIDEBAR_DROP_DOWN_REDIS_KEY;
+        return RedisHelper::set($key, serialize($dropDownList));
+    }
+
+    static public function getSidebarDropDownList($top = '')
+    {
+        RedisHelper::$database = 10;
+        $data = RedisHelper::get(EventInterface::USER_SIDEBAR_DROP_DOWN_REDIS_KEY);
+        $list = empty($data) ? [] : unserialize($data);
+        return $top === '' ? $list : array_merge([0 => $top], $list);
+    }
+
     static public function getTree()
     {
         RedisHelper::$database = 10;

@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('ace.rbac', 'Permissions'), 
 $this->params['breadcrumbs'][] = ['label' => $model->description, 'url' => ['view', 'id' => $model->name], 'icon'=>'fa-eye'];
 $this->params['breadcrumbs'][] = ['label'=> Yii::t('ace', 'Update'), 'icon'=>'fa-edit'];
 
-$this->params['link'] = 'rbac/permission/index';
+$this->params['link'] = 'ace/rbac/permissions';
 ?>
 
 <div class="auth-item-update">

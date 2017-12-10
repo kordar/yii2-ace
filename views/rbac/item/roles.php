@@ -1,4 +1,5 @@
 <?php
+
 use Yii;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -7,7 +8,7 @@ use yii\grid\GridView;
 /* @var $searchModel kordar\ace\modules\rbac\models\AuthItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('ace.rbac', 'Permissions');
+$this->title = Yii::t('ace.rbac', 'Roles');
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-list'];
 ?>
 <div class="auth-item-index">
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-list'];
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('ace.rbac', 'Create Permission'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('ace.rbac', 'Create Role'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

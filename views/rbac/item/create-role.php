@@ -5,11 +5,11 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model kordar\ace\modules\rbac\models\AuthItem */
 
-$this->title = Yii::t('ace.rbac', 'Create Permission');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('ace.rbac', 'Permissions'), 'url' => ['index'], 'icon' => 'fa-list'];
+$this->title = Yii::t('ace.rbac', 'Create Role');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ace.rbac', 'Roles'), 'url' => ['index'], 'icon' => 'fa-list'];
 $this->params['breadcrumbs'][] = $this->title;
 
-$this->params['link'] = 'rbac/permission/index';
+$this->params['link'] = 'ace/rbac/roles';
 ?>
 <div class="auth-item-create">
 

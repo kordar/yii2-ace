@@ -9,6 +9,8 @@ use yii\helpers\Html;
 $this->title = Yii::t('ace.menu', 'Create Menu');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ace.menu', 'Menus'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->params['link'] = 'ace/menu/index';
 ?>
 <div class="sidebar-create">
 

@@ -23,6 +23,8 @@ use Yii;
  */
 class MenuView extends Menu
 {
+    public $hidden_name;
+
     /**
      * @inheritdoc
      */

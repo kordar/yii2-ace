@@ -1,6 +1,5 @@
 <?php
 
-use Yii;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -13,9 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'description')->textInput() ?>
+    <?php if($model->isNewRecord):?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?php else:?>
+        <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'readonly'=>true]) ?>
+    <?php endif;?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'description')->textInput() ?>
 
     <?= $form->field($model, 'rule_name')->textInput(['maxlength' => true]) ?>
 

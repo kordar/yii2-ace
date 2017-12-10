@@ -1,7 +1,8 @@
 <?php
-use Yii;
+
 use yii\helpers\Html;
 use yii\grid\GridView;
+use kordar\ace\helper\GridViewHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel kordar\ace\modules\rbac\models\AuthItemSearch */
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-list'];
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('ace.rbac', 'Create Permission'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('ace.rbac', 'Create Permission'), ['create-permission'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -32,7 +33,18 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-list'];
             // 'created_at',
             // 'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // ['class' => 'yii\grid\ActionColumn'],
+
+            GridViewHelper::actionColumn([
+                'title' => '操作',
+                'template' => ['view', 'update', 'delete'],
+                'item' => [
+                    'view' => ['url' => 'view-permission'],
+                    'update' => ['url' => 'update-permission'],
+                    'delete' => ['url' => 'delete-permission']
+                ]
+            ]),
+
         ],
     ]); ?>
 </div>

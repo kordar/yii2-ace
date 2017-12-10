@@ -1,6 +1,5 @@
 <?php
 
-use Yii;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -11,15 +10,15 @@ $this->title = $model->description;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('ace.rbac', 'Permissions'), 'url' => ['index'], 'icon'=>'fa-list'];
 $this->params['breadcrumbs'][] = ['label' => $this->title];
 
-$this->params['link'] = 'rbac/permission/index';
+$this->params['link'] = 'ace/rbac/permission';
 ?>
 <div class="auth-item-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('yii', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('yii', 'Delete'), ['delete', 'id' => $model->name], [
+        <?= Html::a(Yii::t('yii', 'Update'), ['update-permission', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('yii', 'Delete'), ['delete-permission', 'id' => $model->name], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
