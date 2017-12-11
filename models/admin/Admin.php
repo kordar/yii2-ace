@@ -1,6 +1,7 @@
 <?php
 namespace kordar\ace\models\admin;
 
+use kordar\ace\helper\ActiveFormHelper;
 use Yii;
 use kordar\ace\models\Ace;
 use yii\base\NotSupportedException;
@@ -32,6 +33,7 @@ class Admin extends Ace implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
     const TYPE_SUPER = 9;
+    const TYPE_NORMAL = 0;
 
     /**
      * @inheritdoc
@@ -219,6 +221,31 @@ class Admin extends Ace implements IdentityInterface
             'status_name' => Yii::t('ace.admin', 'Status Name'),
             'type_name' => Yii::t('ace.admin', 'Type Name'),
         ];
+    }
+
+
+    static public function statusList()
+    {
+        return [
+            self::STATUS_DELETED => Yii::t('ace.admin', 'Delete'),
+            self::STATUS_ACTIVE => Yii::t('ace.admin', 'Normal')
+        ];
+    }
+
+    static public function typeList()
+    {
+        return [
+            self::TYPE_NORMAL => Yii::t('ace.admin', 'Normal Admin'),
+            self::TYPE_SUPER => Yii::t('ace.admin', 'Super Admin')
+        ];
+    }
+
+    static public function extFieldsByCase()
+    {
+        return ActiveFormHelper::extSelectCase([
+            'status' => ['alias' => 'status_name', 'items' => self::statusList()],
+            'type' => ['alias' => 'type_name', 'items' => self::typeList()],
+        ]);
     }
 
 }

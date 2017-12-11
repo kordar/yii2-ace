@@ -5,16 +5,18 @@ use yii\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
-/* @var $model kordar\ace\modules\rbac\models\AuthItem */
+/* @var $model kordar\ace\models\rbac\AuthItem */
 
 /**
  * @var $roles
  * @var $permissions
  */
 
-$this->title = '授权';
-$this->params['breadcrumbs'][] = ['label' => '管理员列表', 'url' => ['index']];
+$this->title = Yii::t('ace.admin', 'Admin Assign');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('ace.admin', 'Admins'), 'url' => ['index'], 'icon' => 'fa-list'];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->params['link'] = 'ace/admin/index';
 ?>
 <div class="role-create">
 

@@ -17,4 +17,17 @@ class ActiveFormHelper
             }
         ];
     }
+
+    public static function extSelectCase($options = [])
+    {
+        $params = [];
+        foreach ($options as $field => $option) {
+            $str = '';
+            foreach ($option['items'] as $key => $item) {
+                $str .= " WHEN $key THEN '$item'";
+            }
+            $params[] = "(CASE `$field` $str END) AS {$option['alias']}";
+        }
+        return $params;
+    }
 }

@@ -25,6 +25,8 @@ return [
     'Normal Admin' => '普通管理员',
     'Super Admin' => '超级管理员',
 
+    'Admin Assign' => '管理员权限分配',
+
 
     'Confirm Password' => '重复密码'
 

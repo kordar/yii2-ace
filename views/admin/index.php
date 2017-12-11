@@ -33,18 +33,31 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-users']
             // 'password_hash',
             // 'password_reset_token',
             'email:email',
-            'status',
-            'type',
+            [
+                'attribute' => 'status',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::tag('i', $model->status_name, ['class'=>'text-info']);
+                },
+                'filter' => $searchModel::statusList()
+            ],
+            [
+                'attribute' => 'type',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::tag('i', $model->type_name, ['class'=>'text-warning']);
+                },
+                'filter' => $searchModel::typeList()
+            ],
             // 'created_at',
             // 'updated_at',
             GridViewHelper::actionColumn([
                 'title' => '操作',
-                'template' => ['view', 'update', 'delete', 'assign'],
+                'template' => ['view', 'update', 'assign'],
                 'item' => [
                     'view' => ['url' => 'view'],
                     'update' => ['url' => 'update'],
-                    'delete' => ['url' => 'delete'],
-                    'assign' => ['url' => 'assign']
+                    'assign' => ['url' => 'assign', 'attribute' => ['name']]
                 ]
             ]),
 

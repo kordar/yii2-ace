@@ -2,6 +2,7 @@
 
 namespace kordar\ace\controllers;
 
+use kordar\ace\helper\ActiveFormHelper;
 use kordar\ace\models\admin\EditForm;
 use kordar\ace\models\admin\SignupForm;
 use Yii;
@@ -45,15 +46,11 @@ class AdminController extends AceController
      */
     public function actionView($id)
     {
-        $extSelect = [
-            "(CASE `status` WHEN 0 THEN '" . Yii::t('ace.admin', 'Delete') . "' WHEN 10 THEN '" . Yii::t('ace.admin', 'Normal') . "' END) AS status_name",
-            "(CASE `type` WHEN 0 THEN '" . Yii::t('ace.admin', 'Normal Admin') . "' WHEN 9 THEN '" . Yii::t('ace.admin', 'Super Admin') . "' END) AS type_name",
-        ];
-
         return $this->render('view', [
-            'model' => Admin::find()->select('*')->addSelect($extSelect)->where(['id'=>$id])->one()
+            'model' => Admin::find()->select('*')->addSelect(Admin::extFieldsByCase())->where(['id'=>$id])->one()
         ]);
     }
+
 
     /**
      * Creates a new Admin model.

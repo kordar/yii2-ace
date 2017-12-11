@@ -16,7 +16,7 @@ class AdminSearch extends Admin
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'status', 'created_at', 'updated_at', 'type'], 'integer'],
             [['name', 'avatar', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
         ];
     }
@@ -39,7 +39,7 @@ class AdminSearch extends Admin
      */
     public function search($params)
     {
-        $query = Admin::find();
+        $query = Admin::find()->select('*')->addSelect(Admin::extFieldsByCase());
 
         // add conditions that should always apply here
 
@@ -59,6 +59,7 @@ class AdminSearch extends Admin
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
+            'type' => $this->type,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
