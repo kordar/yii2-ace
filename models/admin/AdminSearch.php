@@ -1,11 +1,9 @@
 <?php
 
-namespace kordar\ace\models\search;
+namespace kordar\ace\models\admin;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use kordar\ace\models\Admin;
 
 /**
  * AdminSearch represents the model behind the search form about `kordar\ace\models\Admin`.

@@ -79,4 +79,32 @@ class GridViewHelper
         };
     }
 
+
+    static public function assignButton($options = [])
+    {
+        return function($url, $model, $key) use($options) {
+            $options = array_merge([
+                'url' => $url, 'key' => $key, 'class' => 'alert-warning', 'title' => 'Grid Assign', 'attribute' => []
+            ], $options);
+            $url = GridViewHelper::getUrl($options['attribute'], $model, $options['url'], $options['key']);
+            return Html::a(Html::tag('span', Yii::t('ace', $options['title'])), $url, ['class' => $options['class'], 'title' => Yii::t('ace', $options['title'])]);
+        };
+    }
+
+    static public function button($options = [])
+    {
+        return function($url, $model, $key) use($options) {
+            $options = array_merge([
+                'url' => $url, 'key' => $key, 'class' => 'alert-success', 'title' => 'Grid Button', 'attribute' => []
+            ], $options);
+            $url = GridViewHelper::getUrl($options['attribute'], $model, $options['url'], $options['key']);
+            return Html::a(Html::tag('span', Yii::t('ace', $options['title'])), $url, ['class' => $options['class'], 'title' => Yii::t('ace', $options['title'])]);
+        };
+    }
+
+    static public function __callStatic($name, $arguments)
+    {
+        return GridViewHelper::button($arguments[0]);
+    }
+
 }

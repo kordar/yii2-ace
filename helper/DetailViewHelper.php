@@ -34,4 +34,5 @@ class DetailViewHelper
             'value' => Html::tag('i', $active[$state], ['class' => $state ? 'text-success' : 'text-danger'])
         ];
     }
+
 }

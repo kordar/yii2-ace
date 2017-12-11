@@ -3,6 +3,7 @@ namespace kordar\ace\helper;
 
 use Yii;
 use kordar\ace\libs\inter\EventInterface;
+use yii\helpers\ArrayHelper;
 
 class SidebarHelper implements EventInterface
 {
@@ -25,7 +26,7 @@ class SidebarHelper implements EventInterface
         RedisHelper::$database = 10;
         $data = RedisHelper::get(EventInterface::USER_SIDEBAR_DROP_DOWN_REDIS_KEY);
         $list = empty($data) ? [] : unserialize($data);
-        return $top === '' ? $list : array_merge([0 => $top], $list);
+        return $top === '' ? $list : ArrayHelper::merge([0 => $top], $list);
     }
 
     static public function getTree()

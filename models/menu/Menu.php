@@ -59,7 +59,7 @@ class Menu extends Ace
             [['title', 'language', 'icon'], 'string', 'max' => 255],
             [['href'], 'string', 'max' => 128],
             ['icon', 'default', 'value'=>'fa-circle-o'],
-            ['sort', 'default', 'value'=>0]
+            [['sort', 'hidden', 'active'], 'default', 'value'=>0]
         ];
     }
 
@@ -95,7 +95,7 @@ class Menu extends Ace
 
     static public function setSidebarList()
     {
-        $data = self::find()->select(['id', 'title', 'hidden', 'parent_id'])->asArray()->orderBy('sort DESC')->all();
+        $data = self::find()->select(['id', 'title', 'hidden', 'parent_id'])->indexBy('id')->orderBy('sort DESC')->asArray()->all();
         $group = new GenerateTreeByArray();
         $tree = $group->tree($data);
         $sideBarTree = new \RecursiveIteratorIterator(new MenuIterator($tree), \RecursiveIteratorIterator::SELF_FIRST);

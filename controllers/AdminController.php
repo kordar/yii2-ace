@@ -2,10 +2,12 @@
 
 namespace kordar\ace\controllers;
 
+use kordar\ace\models\admin\EditForm;
+use kordar\ace\models\admin\SignupForm;
 use Yii;
-use kordar\ace\models\Assignment;
-use kordar\ace\models\Admin;
-use kordar\ace\models\search\AdminSearch;
+use kordar\ace\models\admin\Assignment;
+use kordar\ace\models\admin\Admin;
+use kordar\ace\models\admin\AdminSearch;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -16,7 +18,7 @@ use yii\web\NotFoundHttpException;
  * @item update:更新管理员
  * @item index:管理员列表
  * @item view:管理员详情
- * @item assign:授权
+ * @item assign:角色分配
  */
 class AdminController extends AceController
 {
@@ -43,8 +45,13 @@ class AdminController extends AceController
      */
     public function actionView($id)
     {
+        $extSelect = [
+            "(CASE `status` WHEN 0 THEN '" . Yii::t('ace.admin', 'Delete') . "' WHEN 10 THEN '" . Yii::t('ace.admin', 'Normal') . "' END) AS status_name",
+            "(CASE `type` WHEN 0 THEN '" . Yii::t('ace.admin', 'Normal Admin') . "' WHEN 9 THEN '" . Yii::t('ace.admin', 'Super Admin') . "' END) AS type_name",
+        ];
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => Admin::find()->select('*')->addSelect($extSelect)->where(['id'=>$id])->one()
         ]);
     }
 
@@ -55,15 +62,13 @@ class AdminController extends AceController
      */
     public function actionCreate()
     {
-        $model = new Admin();
+        $model = new SignupForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post()) && $user = $model->signup()) {
+            return $this->redirect(['view', 'id' => $user->id]);
         }
+
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
@@ -74,7 +79,7 @@ class AdminController extends AceController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = EditForm::findOne($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

@@ -3,7 +3,7 @@ namespace kordar\ace\models\form;
 
 use Yii;
 use yii\base\Model;
-use kordar\ace\models\Admin;
+use kordar\ace\models\admin\Admin;
 
 /**
  * Login form

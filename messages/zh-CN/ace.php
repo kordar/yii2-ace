@@ -19,5 +19,10 @@ return [
     'Grid View' => '查看',
     'Grid Update' => '编辑',
     'Grid Delete' => '删除',
+    'Grid Assign' => '权限分配',
+
+    'This user is already in use' => '该用户已被占用',
+    'This email is already registered' => '该邮箱已被注册',
+    'The password is inconsistent twice' => '两次密码不一致',
 
 ];

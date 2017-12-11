@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-list'];
                 'item' => [
                     'view' => ['url' => 'view-permission'],
                     'update' => ['url' => 'update-permission'],
-                    'delete' => ['url' => 'delete-permission']
+                    'delete' => ['url' => 'delete-permission'],
                 ]
             ]),
 

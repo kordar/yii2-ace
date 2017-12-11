@@ -71,7 +71,7 @@ $assetObj = AppAsset::register($this);
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
-                            <?php // \kordar\ace\widgets\Alert::widget() ?><!-- /.breadcrumb -->
+                            <?= \kordar\ace\widgets\Alert::widget() ?><!-- /.breadcrumb -->
 
                             <?= $content; ?>
 
