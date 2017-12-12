@@ -15,6 +15,7 @@ return [
 
     'Create' => '创建',
     'Update' => '更新',
+    'Submit' => '提交',
 
     'Grid View' => '查看',
     'Grid Update' => '编辑',

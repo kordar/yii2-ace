@@ -18,6 +18,19 @@ class ActiveFormHelper
         ];
     }
 
+    public static function aceCheckboxListOptions()
+    {
+        return [
+            'item' => function($index, $label, $name, $checked, $value) {
+                return Html::checkbox($name, $checked, array_merge(['class' => 'ace ace-checkbox-2'], [
+                    'value' => $value,
+                    'label' => Html::tag('span', Html::encode(' ' . $label), ['class'=>'lbl'])
+                ]));
+            }
+        ];
+    }
+
+    // *********
     public static function extSelectCase($options = [])
     {
         $params = [];

@@ -2,13 +2,13 @@
 
 namespace kordar\ace\controllers;
 
-use kordar\ace\helper\ActiveFormHelper;
 use kordar\ace\models\admin\EditForm;
 use kordar\ace\models\admin\SignupForm;
+use kordar\ace\models\rbac\AssignModel;
 use Yii;
-use kordar\ace\models\admin\Assignment;
 use kordar\ace\models\admin\Admin;
 use kordar\ace\models\admin\AdminSearch;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -19,7 +19,7 @@ use yii\web\NotFoundHttpException;
  * @item update:更新管理员
  * @item index:管理员列表
  * @item view:管理员详情
- * @item assign:角色分配
+ * @item assign:管理员授权
  */
 class AdminController extends AceController
 {
@@ -90,22 +90,19 @@ class AdminController extends AceController
     // 授权
     public function actionAssign($id, $name)
     {
-        $model = new Assignment();
+        $model = new AssignModel();
 
         if (Yii::$app->request->isPost) {
 
-            $model->roles = Yii::$app->request->post('roles', []);
-            $model->permissions = Yii::$app->request->post('permissions', []);
-            if ($model->setAssignment($id)) {
+            if ($model->load(Yii::$app->request->post(), '') && $model->setChildrenToUser($id)) {
+                Yii::$app->session->setFlash('success', Html::tag('b', '[' . $name . ']') . Yii::t('ace.rbac', 'Permission assignment is successful'));
                 return $this->redirect(['index']);
             }
+            Yii::$app->session->setFlash('warning', Yii::t('ace.rbac', 'Permission assignment failed'));
         }
 
         return $this->render('assign', [
-            'model' => $model,
-            'roles' => $model->roles($id),
-            'permissions' => $model->permissions($id),
-            'name' => $name
+            'userId' => $id, 'name' => $name
         ]);
     }
 

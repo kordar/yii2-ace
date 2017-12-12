@@ -2,10 +2,11 @@
 
 namespace kordar\ace\controllers;
 
+use kordar\ace\models\rbac\AssignModel;
 use kordar\ace\models\rbac\AuthItem;
 use kordar\ace\models\rbac\AuthItemSearch;
-use kordar\ace\models\rbac\Role;
 use Yii;
+use yii\helpers\Html;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -47,7 +48,7 @@ class RbacController extends AceController
                 return $this->redirect(['permissions']);
             }
         }
-        return $this->render('item/permission/create', [
+        return $this->render('permission/create', [
             'model' => $model,
         ]);
     }
@@ -75,7 +76,7 @@ class RbacController extends AceController
             }
         }
 
-        return $this->render('item/permission/update', [
+        return $this->render('permission/update', [
             'model' => $model,
         ]);
     }
@@ -131,7 +132,7 @@ class RbacController extends AceController
                 return $this->redirect(['roles']);
             }
         }
-        return $this->render('item/role/create', [
+        return $this->render('role/create', [
             'model' => $model,
         ]);
     }
@@ -159,7 +160,7 @@ class RbacController extends AceController
             }
         }
 
-        return $this->render('item/role/update', [
+        return $this->render('role/update', [
             'model' => $model,
         ]);
     }
@@ -194,7 +195,7 @@ class RbacController extends AceController
      */
     public function authItemView($id, $view)
     {
-        return $this->render('item/' . $view, [
+        return $this->render($view, [
             'model' => $this->findModel($id),
         ]);
     }
@@ -210,7 +211,7 @@ class RbacController extends AceController
         $searchModel->type = $type;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('item/' . $view, [
+        return $this->render($view, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -219,29 +220,21 @@ class RbacController extends AceController
     /**
      * @param $id
      * @return string|\yii\web\Response
-     * @item assign:权限分配
+     * @item assign:角色分配权限节点
      */
     public function actionAssign($id)
     {
-        $model = new Role();
-        $model->name = $id;
+        $model = new AssignModel();
 
         if (Yii::$app->request->isPost) {
-
-            $model->roles = Yii::$app->request->post('roles', []);
-            $model->permissions = Yii::$app->request->post('permissions', []);
-            if ($model->setChildren($id)) {
-                Yii::$app->session->setFlash('success', '<b>' . $id . '</b> ' . Yii::t('ace.rbac', 'Permission assignment is successful'));
+            if ($model->load(Yii::$app->request->post(), '') && $model->setChildrenToRole($id)) {
+                Yii::$app->session->setFlash('success', Html::tag('b', '[' . $id . ']') . Yii::t('ace.rbac', 'Permission assignment is successful'));
                 return $this->redirect(['roles']);
             }
             Yii::$app->session->setFlash('warning', Yii::t('ace.rbac', 'Permission assignment failed'));
         }
 
-        return $this->render('item/assign', [
-            'model' => $model,
-            'roles' => $model->getRoles($id),
-            'permissions' => $model->getPermissions($id),
-        ]);
+        return $this->render('assign', ['name' => $id]);
     }
 
 

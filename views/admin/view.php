@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use kordar\ace\helper\DetailViewHelper;
 
 /* @var $this yii\web\View */
 /* @var $model kordar\ace\models\admin\Admin */

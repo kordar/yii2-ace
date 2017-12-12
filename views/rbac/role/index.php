@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-list'];
 
             GridViewHelper::actionColumn([
                 'title' => '操作',
-                'template' => ['view', 'update', 'delete', 'assign'],
+                'template' => ['view', 'update', 'assign', 'delete'],
                 'item' => [
                     'view' => ['url' => 'view-role'],
                     'update' => ['url' => 'update-role'],
