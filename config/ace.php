@@ -16,7 +16,7 @@ return [
 
         # 用户登录认证管理
         'user' => [
-            'identityClass' => 'kordar\ace\models\Admin',
+            'identityClass' => 'kordar\ace\models\admin\Admin',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '__ace_identity', 'httpOnly' => true],
             'idParam' => '__ace_admin',

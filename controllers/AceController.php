@@ -2,6 +2,7 @@
 namespace kordar\ace\controllers;
 
 use kordar\ace\filter\RbacFilter;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
@@ -12,8 +13,9 @@ class AceController extends Controller
 {
     protected $actions = ['*'];
     protected $except = [];
-    protected $rabcExcept = [];
-    protected $mustlogin = [];
+    protected $rbacExcept = [];
+    protected $mustLogin = [];
+
     protected $verbs = [
         'delete' => ['POST']
     ];
@@ -22,19 +24,19 @@ class AceController extends Controller
     {
         return [
             'access' => [
-                'class' => \yii\filters\AccessControl::className(),
+                'class' => AccessControl::className(),
                 // 'user' => 'user',
                 'only' => $this->actions,
                 'except' => $this->except,
                 'rules' => [
                     [
                         'allow' => false,
-                        'actions' => $this->mustlogin,
+                        'actions' => $this->mustLogin,
                         'roles' => ['?'],
                     ],
                     [
                         'allow' => true,
-                        'actions' => $this->mustlogin,
+                        'actions' => $this->mustLogin,
                         'roles' => ['@'],
                     ],
                 ],
@@ -45,10 +47,19 @@ class AceController extends Controller
             ],
             'rbac' => [
                 'class' => RbacFilter::className(),
-                'except' => $this->rabcExcept,
+                'except' => $this->rbacExcept,
             ]
         ];
     }
 
+    protected $closeCsrfValidate = ['upload'];
+
+    public function beforeAction($action)
+    {
+        if(in_array($action->id, $this->closeCsrfValidate)) {
+            $action->controller->enableCsrfValidation = false;
+        }
+        return parent::beforeAction($action);
+    }
 
 }

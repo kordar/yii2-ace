@@ -1,6 +1,8 @@
 <?php
 namespace kordar\ace\controllers;
 
+use kordar\ace\models\admin\Admin;
+use kordar\upload\SingleUploadFile;
 
 /**
  * Default controller for the `ace` module
@@ -12,8 +14,7 @@ namespace kordar\ace\controllers;
  */
 class DefaultController extends AceController
 {
-
-    protected $rabcExcept = ['error'];
+    protected $rbacExcept = ['error'];
 
     public function actions()
     {
@@ -21,6 +22,10 @@ class DefaultController extends AceController
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'upload' => [
+                'class' => SingleUploadFile::className(),
+                'autoSubDateRoot' => 'Y/m/d'
+            ]
         ];
     }
 
@@ -40,7 +45,9 @@ class DefaultController extends AceController
 
     public function actionEnv()
     {
-        return $this->render('env');
+        $model = new Admin();
+        $model->avatar = 'asdf.jpg';
+        return $this->render('env', ['model' => $model]);
     }
 
     public function actionError()
