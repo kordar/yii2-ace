@@ -24,6 +24,7 @@ class DefaultController extends AceController
             ],
             'upload' => [
                 'class' => SingleUploadFile::className(),
+                'catgory' => 'test',
                 'autoSubDateRoot' => 'Y/m/d'
             ]
         ];
@@ -46,12 +47,18 @@ class DefaultController extends AceController
     public function actionEnv()
     {
         $model = new Admin();
-        $model->avatar = 'asdf.jpg';
+        // $model->avatar = '/uploads/2017/12/19/vr0di1u9va1vg1crj695kl1tu3.jpg';
         return $this->render('env', ['model' => $model]);
     }
 
     public function actionError()
     {
+    }
+
+    public function actionDownloadFile($filename)
+    {
+        $res = \YII::$app->response;
+        $res->sendFile($filename);
     }
 
 }

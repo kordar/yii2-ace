@@ -1,6 +1,6 @@
 <?php
 
-namespace kordar\ace;
+namespace kordar\ace\assets;
 
 use yii\web\AssetBundle;
 use yii\web\View;
@@ -18,7 +18,7 @@ class AceAsset extends AssetBundle
         'css/jquery-ui.custom.min.css',
         'css/chosen.min.css',
         'css/fonts.googleapis.com.css',
-        ['css/ace.min.css', 'class'=>'ace-main-stylesheet', 'id'=>'main-ace-style'],
+
         ['css/ace-part2.min.css', 'class'=>'ace-main-stylesheet', 'condition'=>'lte IE 9'],
         'css/ace-skins.min.css',
         'css/ace-rtl.min.css',

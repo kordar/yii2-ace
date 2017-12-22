@@ -2,7 +2,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use kordar\ace\AttestAsset;
+use kordar\ace\assets\AttestAsset;
 use yii\helpers\Html;
 
 AttestAsset::register($this);

@@ -2,7 +2,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use kordar\ace\AppAsset;
+use kordar\ace\web\assets\AppAsset;
 use yii\helpers\Html;
 use kordar\ace\helper\SidebarHelper;
 

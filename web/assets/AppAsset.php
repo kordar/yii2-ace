@@ -1,6 +1,6 @@
 <?php
 
-namespace kordar\ace;
+namespace kordar\ace\web\assets;
 
 use yii\web\AssetBundle;
 use yii\web\View;
@@ -10,7 +10,6 @@ use yii\web\View;
  */
 class AppAsset extends AssetBundle
 {
-
     public $sourcePath = '@kordar/ace/assets/sys';
 
     public $css = [
@@ -18,13 +17,11 @@ class AppAsset extends AssetBundle
     ];
 
     public $js = [
-        //'js/zclip.min.js',
         'js/jquery.zclip.js',
         'js/tools.js',
     ];
 
     public $depends = [
-        'kordar\ace\AceAsset',
+        'kordar\ace\web\assets\AceAsset',
     ];
-
 }

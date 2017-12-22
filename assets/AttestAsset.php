@@ -1,5 +1,5 @@
 <?php
-namespace kordar\ace;
+namespace kordar\ace\assets;
 
 use yii\web\AssetBundle;
 
@@ -9,6 +9,6 @@ use yii\web\AssetBundle;
 class AttestAsset extends AssetBundle
 {
     public $depends = [
-        'kordar\ace\AceAsset',
+        'kordar\ace\assets\AceAsset',
     ];
 }
