@@ -1,5 +1,5 @@
 <?php
-namespace kordar\ace\filter;
+namespace kordar\ace\web\filter;
 
 use Yii;
 use yii\base\ActionFilter;

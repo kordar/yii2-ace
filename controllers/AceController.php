@@ -1,7 +1,7 @@
 <?php
 namespace kordar\ace\controllers;
 
-use kordar\ace\filter\RbacFilter;
+use kordar\ace\web\filter\RbacFilter;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
