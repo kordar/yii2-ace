@@ -2,7 +2,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = '密码找回';
+$this->title = \Yii::t('ace.login', 'Retrieve The Password');
 
 /**
  * @var $model
@@ -10,17 +10,18 @@ $this->title = '密码找回';
 ?>
 <div id="forgot-box" class="forgot-box visible widget-box no-border">
     <div class="widget-body">
+
         <div class="widget-main">
             <h4 class="header red lighter bigger">
                 <i class="ace-icon fa fa-key"></i>
-                找回密码
+                <?= $this->title; ?>
             </h4>
 
-            <?= \kordar\ace\widgets\Alert::widget() ?>
+            <?= \kordar\ace\web\widgets\Alert::widget() ?>
 
             <div class="space-6"></div>
             <p>
-                输入您的电子邮件和接收指令
+                <?= \Yii::t('ace.login', 'Enter your email and receive instructions')?>
             </p>
 
             <?php $form = ActiveForm::begin([
@@ -38,7 +39,7 @@ $this->title = '密码找回';
 
                     <?= Html::submitButton(
                         '<i class="ace-icon fa fa-lightbulb-o"></i>
-                            <span class="bigger-110">发送邮件</span>',
+                            <span class="bigger-110">' . \Yii::t('ace.login', 'Send Me') . '</span>',
                         ['class' => 'width-35 pull-right btn btn-sm btn-danger'])
                     ?>
 
@@ -50,7 +51,7 @@ $this->title = '密码找回';
 
         <div class="toolbar center">
             <?= Html::a(
-                "返回登录\n<i class=\"ace-icon fa fa-arrow-right\"></i>",
+                \Yii::t('ace.login', 'Back to login') . "\n<i class=\"ace-icon fa fa-arrow-right\"></i>",
                 ['login'],
                 ['class'=>'back-to-login-link']
             ) ?>

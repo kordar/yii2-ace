@@ -2,7 +2,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = '注册用户';
+$this->title = Yii::t('ace.login', 'New User Registration');
 
 /**
  * @var $model
@@ -13,11 +13,11 @@ $this->title = '注册用户';
         <div class="widget-main">
             <h4 class="header green lighter bigger">
                 <i class="ace-icon fa fa-users blue"></i>
-                用户注册
+                <?= $this->title?>
             </h4>
 
             <div class="space-6"></div>
-            <p>填写信息: </p>
+            <p><?= Yii::t('ace.login', 'Enter your details to begin:')?> </p>
 
             <?php $form = ActiveForm::begin([
                 'action'=>['signup'],
@@ -28,28 +28,25 @@ $this->title = '注册用户';
 
                 <?= $form->field($model, 'email', [
                     'template' => "<span class='block input-icon input-icon-right'>{input}<i class=\"ace-icon fa fa-envelope\"></i></span>{error}"
-                ])->textInput(['placeholder'=>'邮箱', 'type'=>'email']) ?>
+                ])->textInput(['placeholder'=>Yii::t('ace.login', 'Email'), 'type'=>'email']) ?>
 
                 <?= $form->field($model, 'username', [
                     'template' => "<span class='block input-icon input-icon-right'>{input}<i class=\"ace-icon fa fa-user\"></i></span>{error}"
-                ])->textInput(['placeholder'=>'用户名']) ?>
+                ])->textInput(['placeholder'=>Yii::t('ace.login', 'Username')]) ?>
 
                 <?= $form->field($model, 'password', [
                     'template' => "<span class='block input-icon input-icon-right'>{input}<i class=\"ace-icon fa fa-lock\"></i></span>{error}"
-                ])->passwordInput(['placeholder'=>'密码']) ?>
+                ])->passwordInput(['placeholder'=>Yii::t('ace.login', 'Password')]) ?>
 
                 <?= $form->field($model, 'repassword', [
                     'template' => "<span class='block input-icon input-icon-right'>{input}<i class=\"ace-icon fa fa-lock\"></i></span>{error}"
-                ])->passwordInput(['placeholder'=>'确认密码']) ?>
+                ])->passwordInput(['placeholder'=>Yii::t('ace.login', 'confirmPassword')]) ?>
 
-
-                <!--                <label class="block">-->
-                <!--                    <input type="checkbox" class="ace" />-->
-                <!--                    <span class="lbl">-->
-                <!--                        接受-->
-                <!--                        <a href="#">用户协议</a>-->
-                <!--                    </span>-->
-                <!--                </label>-->
+                <?= $form->field($model, 'agreement')->checkbox([
+                    'class'=>'ace',
+                    'template' => "<div class=\"block\">\n{beginLabel}\n{input}\n{labelTitle}\n{endLabel}\n{error}\n{hint}\n</div>",
+                    'label'=>Html::tag('span', ' ' . Yii::t('ace.login', 'I accept the') . Html::a(Yii::t('ace.login', 'User Agreement'), '#', ['target'=>'_blank']),
+                ['class'=>'lbl'])]) ?>
 
                 <div class="space-6"></div>
 
@@ -57,12 +54,12 @@ $this->title = '注册用户';
 
                     <?= Html::resetButton(
                         Html::tag('i', '', ['class'=>'ace-icon fa fa-refresh']) . "\n" .
-                        Html::tag('span', '重置', ['class'=>'bigger-110']),
+                        Html::tag('span', Yii::t('ace.login', 'Reset'), ['class'=>'bigger-110']),
                         ['class' => 'width-30 pull-left btn btn-sm', 'name' => 'login-button'])
                     ?>
 
                     <?= Html::submitButton(
-                        Html::tag('span', '注册', ['class'=>'bigger-110']) . "\n" .
+                        Html::tag('span', Yii::t('ace.login', 'Register'), ['class'=>'bigger-110']) . "\n" .
                         Html::tag('i', '', ['class'=>'ace-icon fa fa-arrow-right icon-on-right']),
                         ['class' => 'width-65 pull-right btn btn-sm btn-success','name' => 'login-button'])
                     ?>
@@ -77,9 +74,8 @@ $this->title = '注册用户';
         <div class="toolbar center">
 
             <?= Html::a(
-                "<i class=\"ace-icon fa fa-arrow-left\"></i>\n返回登录",
-                ['auth/login'],
-                ['class'=>'back-to-login-link']
+                "<i class=\"ace-icon fa fa-arrow-left\"></i>\n" . Yii::t('ace.login', 'Back to login'),
+                ['auth/login'], ['class'=>'back-to-login-link']
             ) ?>
 
         </div>

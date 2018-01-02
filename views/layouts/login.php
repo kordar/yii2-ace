@@ -2,10 +2,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use kordar\ace\assets\AttestAsset;
+use kordar\ace\web\assets\DefaultAsset;
 use yii\helpers\Html;
 
-AttestAsset::register($this);
+DefaultAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>
@@ -20,7 +20,7 @@ AttestAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class='login-layout' style="background-image: url('/images/bg2.jpg'); background-repeat: no-repeat; background-size: cover">
+<body class='login-layout'>
 <?php $this->beginBody() ?>
 
 <div class="main-container">
@@ -31,10 +31,10 @@ AttestAsset::register($this);
                     <div class="center">
                         <h1>
                             <i class="ace-icon fa fa-leaf green"></i>
-                            <span class="red">Ace</span>
-                            <span class="white" id="id-text2">Application</span>
+                            <span class="red"><?= Yii::$app->params['webTitle']?></span>
+                            <span class="white" id="id-text2"><?= Yii::$app->params['webSubTitle']?></span>
                         </h1>
-                        <h4 class="blue" id="id-company-text">&copy; Company Name</h4>
+                        <h4 class="blue" id="id-company-text">&copy; <?= Yii::$app->params['companyName']?></h4>
                     </div>
 
                     <div class="space-6"></div>
@@ -46,15 +46,15 @@ AttestAsset::register($this);
                     <div class="navbar-fixed-top align-right">
                         <br />
                         &nbsp;
-                        <a id="btn-login-dark" href="#">Dark</a>
+                        <a id="btn-login-dark" href="#"><?= Yii::t('ace.login', 'Dark')?></a>
                         &nbsp;
                         <span class="blue">/</span>
                         &nbsp;
-                        <a id="btn-login-blur" href="#">Blur</a>
+                        <a id="btn-login-blur" href="#"><?= Yii::t('ace.login', 'Blur')?></a>
                         &nbsp;
                         <span class="blue">/</span>
                         &nbsp;
-                        <a id="btn-login-light" href="#">Light</a>
+                        <a id="btn-login-light" href="#"><?= Yii::t('ace.login', 'Light')?></a>
                         &nbsp; &nbsp; &nbsp;
                     </div>
                 </div>

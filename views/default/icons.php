@@ -11,7 +11,7 @@
 
 <?php $this->endBlock(); ?>
 
-<?= \kordar\ace\widgets\components\IconsChosen::widget()?>
+<?= \kordar\ace\widgets\components\FontAwesome::widget()?>
 
 <?php
 	$js = <<<JS

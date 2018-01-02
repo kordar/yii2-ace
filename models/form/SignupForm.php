@@ -1,7 +1,7 @@
 <?php
 namespace kordar\ace\models\form;
 
-use kordar\ace\models\Admin;
+use kordar\ace\models\admin\Admin;
 use yii\base\Model;
 
 /**
@@ -13,6 +13,9 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $repassword;
+    public $agreement;
+
+    const AGREEMENT_OK = 1;
 
     /**
      * @inheritdoc
@@ -20,33 +23,26 @@ class SignupForm extends Model
     public function rules()
     {
         return [
-            ['username', 'trim'],
-            ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\kordar\ace\models\Admin', 'message' => '该用户已被占用！'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
-            ['email', 'trim'],
-            ['email', 'required'],
+            [['username', 'email'], 'trim'],
+            [['username', 'agreement', 'email', 'password', 'repassword'], 'required'],
+            [['username', 'email'], 'string', 'min' => 2, 'max' => 255],
+            ['agreement', 'in', 'range' => [self::AGREEMENT_OK]],
             ['email', 'email'],
-            ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\kordar\ace\models\Admin', 'message' => '该邮箱已被注册！'],
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
-
-            ['repassword', 'required'],
-            ['repassword', 'string', 'min' => 6],
-
-            ['repassword', 'compare', 'compareAttribute'=>'password', 'message'=>'两次密码不一致']
-
+            ['username', 'unique', 'targetClass' => Admin::className(), 'message' => \Yii::t('ace', 'This user is already in use')],
+            ['email', 'unique', 'targetClass' => Admin::className(), 'message' => \Yii::t('ace', 'This email is already registered')],
+            [['password', 'repassword'], 'string', 'min' => 6],
+            ['repassword', 'compare', 'compareAttribute'=>'password', 'message'=>\Yii::t('ace', 'The password is inconsistent twice')]
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'username' => '用户名',
-            'email' => 'Email',
-            'password' => '密码',
-            'repassword' => '重复密码'
+            'username' => \Yii::t('ace.login', 'Username'),
+            'email' => \Yii::t('ace.login', 'Email'),
+            'password' => \Yii::t('ace.login', 'Password'),
+            'repassword' => \Yii::t('ace.login', 'confirmPassword'),
+            'agreement' => \Yii::t('ace.login', 'User Agreement'),
         ];
     }
 

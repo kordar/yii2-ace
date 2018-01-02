@@ -1,9 +1,8 @@
 <?php
 namespace kordar\ace\models\form;
 
-use Yii;
 use yii\base\Model;
-use kordar\ace\models\Admin;
+use kordar\ace\models\admin\Admin;
 
 /**
  * Password reset request form
@@ -23,9 +22,9 @@ class PasswordResetRequestForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'exist',
-                'targetClass' => '\kordar\ace\models\Admin',
+                'targetClass' => Admin::className(),
                 'filter' => ['status' => Admin::STATUS_ACTIVE],
-                'message' => '该邮箱不存在'
+                'message' => \Yii::t('ace.login', 'This email does not exist')
             ],
         ];
     }
@@ -54,15 +53,15 @@ class PasswordResetRequestForm extends Model
             }
         }
 
-        return Yii::$app
+        return \Yii::$app
             ->mailer
             ->compose(
                 ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject('Password reset for ' . Yii::$app->name)
+            ->setSubject('Password reset for ' . \Yii::$app->name)
             ->send();
     }
 }

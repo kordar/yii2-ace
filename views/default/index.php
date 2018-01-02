@@ -1,5 +1,11 @@
 <div class="ace-default-index">
+
     <h1><?= $this->context->action->uniqueId ?></h1>
+
+    <?= \kordar\ace\web\widgets\ZeroClipboard::widget(['items' => [
+            'h1' => 'AAAAA'
+    ]])?>
+
     <p>
         This is the view content for action "<?= $this->context->action->id ?>".
         The action belongs to the controller "<?= get_class($this->context) ?>"

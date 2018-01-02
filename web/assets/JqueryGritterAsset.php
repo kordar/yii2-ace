@@ -12,6 +12,6 @@ class JqueryGritterAsset extends AceBundle
     ];
 
     public $depends = [
-        'yii\web\YiiAsset',
+        'yii\web\JqueryAsset',
     ];
 }

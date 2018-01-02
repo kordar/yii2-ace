@@ -3,7 +3,7 @@ namespace kordar\ace\models\form;
 
 use yii\base\Model;
 use yii\base\InvalidParamException;
-use kordar\ace\models\Admin;
+use kordar\ace\models\admin\Admin;
 
 /**
  * Password reset form
@@ -14,7 +14,7 @@ class ResetPasswordForm extends Model
     public $repassword;
 
     /**
-     * @var \kordar\ace\models\Admin
+     * @var \kordar\ace\models\admin\Admin
      */
     private $_user;
 
@@ -29,11 +29,13 @@ class ResetPasswordForm extends Model
     public function __construct($token, $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidParamException('Password reset token cannot be blank.');
+            $message = \Yii::t('ace.login', 'Password reset token cannot be blank.');
+            throw new InvalidParamException($message);
         }
         $this->_user = Admin::findByPasswordResetToken($token);
         if (!$this->_user) {
-            throw new InvalidParamException('Wrong password reset token.');
+            $message = \Yii::t('ace.login', 'Wrong password reset token.');
+            throw new InvalidParamException($message);
         }
         parent::__construct($config);
     }
@@ -44,22 +46,17 @@ class ResetPasswordForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
-
-            ['repassword', 'required'],
-            ['repassword', 'string', 'min' => 6],
-
-            ['repassword', 'compare', 'compareAttribute'=>'password', 'message'=>'两次密码不一致']
-
+            [['password', 'repassword'], 'required'],
+            [['password', 'repassword'], 'string', 'min' => 6],
+            ['repassword', 'compare', 'compareAttribute'=>'password', 'message'=>\Yii::t('ace', 'The password is inconsistent twice')]
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'password' => '密码',
-            'repassword' => '重复密码'
+            'password' => \Yii::t('ace.login', 'Password'),
+            'repassword' => \Yii::t('ace.login', 'confirmPassword')
         ];
     }
 

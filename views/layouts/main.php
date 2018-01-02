@@ -4,7 +4,7 @@
 
 use kordar\ace\web\assets\AppAsset;
 use yii\helpers\Html;
-use kordar\ace\helper\SidebarHelper;
+use kordar\ace\web\helper\SidebarHelper;
 
 $assetObj = AppAsset::register($this);
 
@@ -23,7 +23,7 @@ $assetObj = AppAsset::register($this);
 <body class="no-skin">
 <?php $this->beginBody() ?>
 
-    <?= \kordar\ace\widgets\Navbar::widget(['baseUrl'=>$assetObj->baseUrl]);?>
+    <?= \kordar\ace\web\widgets\Navbar::widget(['baseUrl'=>$assetObj->baseUrl]);?>
 
     <div class="main-container ace-save-state" id="main-container">
 
@@ -31,7 +31,7 @@ $assetObj = AppAsset::register($this);
             try{ace.settings.loadState('main-container')}catch(e){}
         </script>
 
-        <?= \kordar\ace\widgets\Sidebar::widget([
+        <?= \kordar\ace\web\widgets\Sidebar::widget([
             'link'=> empty($this->params['link']) ? SidebarHelper::linker() : $this->params['link'],
             'tree'=> SidebarHelper::getTree()
         ]);?>
@@ -41,7 +41,7 @@ $assetObj = AppAsset::register($this);
             <div class="main-content-inner">
                 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
 
-                    <?= \kordar\ace\widgets\Breadcrumbs::widget([
+                    <?= \kordar\ace\web\widgets\Breadcrumbs::widget([
                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                     ]) ?>
 
@@ -71,7 +71,7 @@ $assetObj = AppAsset::register($this);
                     <div class="row">
                         <div class="col-xs-12">
                             <!-- PAGE CONTENT BEGINS -->
-                            <?= \kordar\ace\widgets\Alert::widget() ?><!-- /.breadcrumb -->
+                            <?= \kordar\ace\web\widgets\Alert::widget() ?><!-- /.breadcrumb -->
 
                             <?= $content; ?>
 
@@ -113,20 +113,6 @@ $assetObj = AppAsset::register($this);
     </div>
 
 <!-- inline scripts related to this page -->
-
-<?php
-
-$path = $assetObj->baseUrl . '/js/ZeroClipboard.swf';
-
-$js = <<<JS
-    $('.copy-zclip').each(function() {
-          $(this).zclip({path: '{$path}', copy: function(){var txt = $(this).attr('data-copy');return txt; }});
-    });
-JS;
-
-$this->registerJs($js);
-
-?>
 
 <?php $this->endBody() ?>
 

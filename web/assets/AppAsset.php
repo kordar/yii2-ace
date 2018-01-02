@@ -17,7 +17,6 @@ class AppAsset extends AssetBundle
     ];
 
     public $js = [
-        'js/jquery.zclip.js',
         'js/tools.js',
     ];
 
