@@ -1,7 +1,7 @@
 <?php
 namespace kordar\ace\models\rbac;
 
-use kordar\ace\helper\RbacHelper;
+use kordar\ace\web\helper\RbacHelper;
 use yii\base\Model;
 use yii\db\Exception;
 

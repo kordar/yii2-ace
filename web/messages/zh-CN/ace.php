@@ -26,4 +26,6 @@ return [
     'This email is already registered' => '该邮箱已被注册',
     'The password is inconsistent twice' => '两次密码不一致',
 
+    'Sorry, you do not have permission to access this page!' => '抱歉，您无权访问此页面！',
+
 ];

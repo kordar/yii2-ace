@@ -1,7 +1,6 @@
 <?php
 namespace kordar\ace\web\filter;
 
-use Yii;
 use yii\base\ActionFilter;
 use yii\web\HttpException;
 
@@ -15,49 +14,41 @@ class RbacFilter extends ActionFilter
             return false;
         }
 
-        $actionName = $action->id;
-
-        if (in_array($actionName, $this->except)) {
+        if (in_array($action->id, $this->except) || $this->isSuper()) {
             return true;
         }
 
-        $module = $action->controller->module->id;
-        $controller = $action->controller->id;
-
-
-        $prefix = $module == 'basic' ? $controller : $module . '/' . $controller;
-
-        if ($this->setAuthKey()) {
-            return true;
-        }
-
-        if (Yii::$app->user->can($prefix . '/*')) {
-            return true;
-        }
-        if (Yii::$app->user->can($prefix . '/'. $actionName)) {
-            return true;
-        }
-
-        throw new HttpException(503, '对不起，您没有访问'. $module . '/' . $controller. '/'. $actionName. '的权限');
+        return $this->canPass($action->controller->module->id, $action->controller->id, $action->id);
     }
 
-    protected function setAuthKey()
+    private function setAuthKey($userId, $super = false)
     {
-        if (Yii::$app->user->identity !== null) {
-            $userId = Yii::$app->user->identity->getId();
-            $auth = Yii::$app->authManager;
+        $auth = \Yii::$app->authManager;
+        $data = ($super === false) ? $auth->getPermissionsByUser($userId) : $auth->getPermissions();
+        \Yii::$app->params['authKeys'] = array_keys($data);
+        return true;
+    }
 
-            if (Yii::$app->user->identity->super()) {
-                $data = $auth->getPermissions();
-                Yii::$app->params['authKeys'] = array_keys($data);
-                return true;
-            } else {
-                $data = $auth->getPermissionsByUser($userId);
-                Yii::$app->params['authKeys'] = array_keys($data);
-            }
+    private function isSuper()
+    {
+        /**
+         * @var \kordar\ace\models\admin\Admin $identity
+         */
+        $identity = \Yii::$app->user->identity;
+        $super = ($identity !== null) ? $identity->super() : false;
+        $this->setAuthKey($identity->getId(), $super);
+        return $super;
+    }
+
+    private function canPass($module, $controller, $action)
+    {
+        $prefix = $module == 'basic' ? $controller : $module . '/' . $controller;
+
+        if (\Yii::$app->user->can($prefix . '/*') || \Yii::$app->user->can($prefix . '/'. $action)) {
+            return true;
+        } else {
+            throw new HttpException(503, \Yii::t('ace', 'Sorry, you do not have permission to access this page!'));
         }
-
-        return false;
     }
 
 }

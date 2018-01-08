@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model kordar\ace\models\Sidebar */
+/* @var $model kordar\ace\models\menu\Menu */
 
-$this->title = Yii::t('ace.menu', 'Create Menu');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('ace.menu', 'Menus'), 'url' => ['index']];
+$this->title = \Yii::t('ace.menu', 'Create Menu');
+$this->params['breadcrumbs'][] = ['label' => \Yii::t('ace.menu', 'Menus'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->params['link'] = 'ace/menu/index';

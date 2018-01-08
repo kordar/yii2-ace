@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use kordar\ace\helper\GridViewHelper;
+use kordar\ace\web\helper\GridViewHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel kordar\ace\modules\rbac\models\AuthItemSearch */

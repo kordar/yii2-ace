@@ -2,13 +2,13 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use kordar\ace\helper\DetailViewHelper;
+use kordar\ace\web\helper\DetailViewHelper;
 
 /* @var $this yii\web\View */
-/* @var $model kordar\ace\models\Sidebar */
+/* @var $model kordar\ace\models\menu\Menu */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('ace.menu', 'Menus'), 'url' => ['index'], 'icon'=>'fa-list'];
+$this->params['breadcrumbs'][] = ['label' => \Yii::t('ace.menu', 'Menus'), 'url' => ['index'], 'icon'=>'fa-list'];
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon'=>'fa-eye'];
 
 $this->params['link'] = 'ace/menu/index';
@@ -19,11 +19,11 @@ $this->params['link'] = 'ace/menu/index';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('yii', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('yii', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(\Yii::t('yii', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(\Yii::t('yii', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                'confirm' => \Yii::t('yii', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>

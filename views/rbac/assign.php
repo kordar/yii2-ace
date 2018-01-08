@@ -2,8 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kordar\ace\helper\ActiveFormHelper;
-use kordar\ace\helper\RbacHelper;
+use kordar\ace\web\helper\ActiveFormHelper;
+use kordar\ace\web\helper\RbacHelper;
 
 /* @var $this yii\web\View */
 /* @var $model kordar\ace\models\rbac\AuthItem */

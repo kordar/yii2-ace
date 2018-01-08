@@ -24,6 +24,11 @@ class AceAsset extends AceBundle
         ['js/respond.min.js', 'condition'=>'lte IE 8', 'position'=>View::POS_HEAD],
         'js/ace-elements.min.js',
         'js/ace.min.js',
+
+//        'js/markdown.min.js',
+//        'js/bootstrap-markdown.min.js',
+        'js/jquery.hotkeys.index.min.js',
+        'js/bootstrap-wysiwyg.min.js'
     ];
 
     public $depends = [

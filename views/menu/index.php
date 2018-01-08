@@ -2,14 +2,14 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use kordar\ace\helper\GridViewHelper;
-use kordar\ace\helper\SidebarHelper;
+use kordar\ace\web\helper\GridViewHelper;
+use kordar\ace\web\helper\SidebarHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel kordar\ace\models\menu\MenuSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('ace.menu', 'Menus');
+$this->title = \Yii::t('ace.menu', 'Menus');
 $this->params['breadcrumbs'][] = ['label'=>$this->title, 'icon'=>'fa-list'];
 ?>
 <div class="sidebar-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = ['label'=>$this->title, 'icon'=>'fa-list'];
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('ace.menu', 'Create Menu'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(\Yii::t('ace.menu', 'Create Menu'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -1,7 +1,6 @@
 <?php
 namespace kordar\ace\models\admin;
 
-
 use Yii;
 
 /**

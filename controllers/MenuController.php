@@ -2,8 +2,8 @@
 
 namespace kordar\ace\controllers;
 
-use kordar\ace\models\menu\Menu;
 use Yii;
+use kordar\ace\models\menu\Menu;
 use kordar\ace\models\menu\MenuView;
 use kordar\ace\models\menu\MenuSearch;
 use yii\web\NotFoundHttpException;

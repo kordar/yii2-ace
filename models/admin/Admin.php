@@ -1,7 +1,7 @@
 <?php
 namespace kordar\ace\models\admin;
 
-use kordar\ace\helper\ActiveFormHelper;
+use kordar\ace\web\helper\ActiveFormHelper;
 use Yii;
 use kordar\ace\models\Ace;
 use yii\base\NotSupportedException;
