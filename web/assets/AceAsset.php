@@ -27,8 +27,8 @@ class AceAsset extends AceBundle
 
 //        'js/markdown.min.js',
 //        'js/bootstrap-markdown.min.js',
-        'js/jquery.hotkeys.index.min.js',
-        'js/bootstrap-wysiwyg.min.js'
+/*        'js/jquery.hotkeys.index.min.js',
+        'js/bootstrap-wysiwyg.min.js'*/
     ];
 
     public $depends = [

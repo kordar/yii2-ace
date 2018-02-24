@@ -8,8 +8,14 @@ namespace kordar\ace\web\assets;
 
 class UploadAsset extends \yii\web\AssetBundle
 {
+    public $sourcePath = '@kordar/ace/assets/sys';
+
+    public $js = [
+        'js/kordar.upload.js'
+    ];
+
     public $depends = [
         'yii\web\JqueryAsset',
-        'kordar\ace\web\assets\BootboxAsset'
+        'kordar\ace\web\assets\BootboxAsset',
     ];
 }

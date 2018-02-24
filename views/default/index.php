@@ -2,6 +2,7 @@
 use yii\bootstrap\ActiveForm;
 
 $model = new \kordar\ace\models\admin\Admin();
+// $model->avatar = '123';
 
 ?>
 <div class="ace-default-index">
@@ -14,7 +15,7 @@ $model = new \kordar\ace\models\admin\Admin();
 
     <?= $form->field($model, 'avatar')->widget(\kordar\ace\web\widgets\upload\Well::className()) ?>
 
-    <?= $form->field($model, 'username')->widget(\kordar\ace\web\widgets\editor\Wysiwyg::className()) ?>
+    <?php // $form->field($model, 'username')->widget(\kordar\ace\web\widgets\editor\Wysiwyg::className()) ?>
 
     <?php ActiveForm::end(); ?>
 

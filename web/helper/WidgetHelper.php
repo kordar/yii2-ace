@@ -3,10 +3,9 @@ namespace kordar\ace\web\helper;
 
 class WidgetHelper
 {
-    public static function inputJs($id, $options = [], $change = '')
+    public static function inputJs($id, $options = [], $callback = '')
     {
-        $str = WidgetHelper::getOptions($options);
-        return "$('#" . $id . "').ace_file_input({" . $str . "}).on('change', function() {" . $change . "})";
+        return "$('#" . $id . "').ace_file_input({" . WidgetHelper::getOptions($options) . "});" . $callback;
     }
 
     public static function showInputJs($id, $value)
@@ -44,16 +43,9 @@ class WidgetHelper
         return implode(',', $opt);
     }
 
-    public static function callbackJs($id, $url)
+    public static function callbackJs($id, $url, $callback = 'function(json){console.log(json);}', $filename = '')
     {
-        $label = [
-            'warning' => \Yii::t('ace.upload','Warning'),
-            'browser_does_not_support' => \Yii::t('ace.upload', 'Browser does not support'),
-        ];
-        $js = 'if(window.FormData){var formData=new FormData();formData.append("SingleUploadForm[file]",document.getElementById("{id}").files[0]);formData.append("filename",document.getElementById("{hiddenId}").value);var xhr=new XMLHttpRequest();xhr.open("POST","{url}");xhr.onload=function(){if(xhr.status===200){var json=$.parseJSON(xhr.responseText);if(json.status==="success"){var path=json.path;$("#{hiddenId}").val(path);return}}bootboxWarning(json.msg,"{label-warning}")};xhr.send(formData)}else{bootboxWarning("{label-browser-does-not-support}","{label-warning}")};';
-        return str_replace(['{id}', '{hiddenId}', '{url}', '{label-warning}', '{label-browser-does-not-support}'], [
-            $id, $id . '-hidden', $url, $label['warning'], $label['browser_does_not_support']
-        ], $js);
+        return '$(\'#' . $id . '\').kordar_upload({url: \'' . $url . '\', upload_load: ' . $callback . ', filename_callback: ' . $filename . '});';
     }
 
     public static function callbackWysiwygJs($id, $url)
