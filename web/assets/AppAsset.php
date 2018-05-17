@@ -10,7 +10,7 @@ use yii\web\View;
  */
 class AppAsset extends AssetBundle
 {
-    public $sourcePath = '@kordar/ace/assets/sys';
+    public $sourcePath = '@kordar/ace/assets/web';
 
     public $css = [
         'css/style.css'
@@ -22,5 +22,7 @@ class AppAsset extends AssetBundle
 
     public $depends = [
         'kordar\ace\web\assets\AceAsset',
+        //'kordar\ace\web\assets\plugins\JqueryUIAsset',
+        'kordar\ace\web\assets\AceScriptAsset'
     ];
 }

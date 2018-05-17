@@ -2,10 +2,10 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use kordar\ace\web\assets\DefaultAsset;
+use kordar\ace\web\assets\AceAsset;
 use yii\helpers\Html;
 
-DefaultAsset::register($this);
+AceAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>
