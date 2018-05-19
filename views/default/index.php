@@ -18,22 +18,21 @@ $model = new \kordar\ace\models\admin\Admin();
 
     <h1><?= $this->context->action->uniqueId ?></h1>
 
-    <?php // $form = ActiveForm::begin(['action'=>['index'], 'method'=>'post']) ?>
+    <?php $form = ActiveForm::begin(['action'=>['index'], 'method'=>'post']) ?>
 
-    <?php // $form->field($model, 'avatar')->widget(\kordar\ace\web\widgets\upload\Well::className()) ?>
+    <?= $form->field($model, 'avatar')->widget(\kordar\ace\web\widgets\upload\Well::className()) ?>
 
-    <?php
-//    $form->field($model, 'avatar')->widget(\kordar\editormd\EditorMd::className(), [
-//        'id' => 'quick-start', 'assetClassName' => 'kordar\ace\web\assets\EditorMdAsset',
-//        'editorOptions' => [
-//           'uploadUrl' => \yii\helpers\Url::to(['/site/upload']),
-//        ]
-//    ])
+    <?= $form->field($model, 'avatar')->widget(\kordar\editormd\EditorMd::className(), [
+        'id' => 'quick-start', 'assetClassName' => 'kordar\ace\web\assets\EditorMdAsset',
+        'editorOptions' => [
+           'uploadUrl' => \yii\helpers\Url::to(['/site/upload']),
+        ]
+    ])
     ?>
 
     <?php // $form->field($model, 'username')->widget(\kordar\ace\web\widgets\editor\Wysiwyg::className()) ?>
 
-    <?php // ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 
     <p>
         This is the view content for action "<?= $this->context->action->id ?>".

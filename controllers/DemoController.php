@@ -25,10 +25,9 @@ class DemoController extends Controller
         return $this->render('index');
     }
 
-    /**
-     * Error Page
-     * @item error:异常页面
-     */
-    // public function actionError() {}
+    public function actionElements()
+    {
+        return $this->render('element');
+    }
 
 }
