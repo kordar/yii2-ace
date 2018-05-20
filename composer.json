@@ -15,7 +15,7 @@
         "yiisoft/yii2-redis": "*",
 
         "kordar/upload": "dev-ace",
-        "kordar/editormd": "0.0.*",
+        "kordar/editormd": "1.0.0",
 
         "bower-asset/aceadmin": "1.1.1",
         "bower-asset/jquery-zclip": "1.1.*"
