@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = ['label'=>$this->title, 'icon'=>'fa-list'];
                 'value' => function ($model) {
                     return Html::tag('i', $model->parent_title, ['class'=>'text-info']);
                 },
-                'filter' => SidebarHelper::getSidebarDropDownList()
+                'filter' => SidebarHelper::getSidebarDropDownList('无')
             ],
             [
                 'attribute' => 'hidden',

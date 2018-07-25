@@ -14,6 +14,7 @@ class AceController extends Controller
     protected $actions = ['*'];
     protected $except = [];
     protected $rbacExcept = [];
+    protected $rbacJsonMessageOnly = [];
     protected $mustLogin = [];
 
     protected $verbs = [
@@ -48,6 +49,7 @@ class AceController extends Controller
             'rbac' => [
                 'class' => RbacFilter::className(),
                 'except' => $this->rbacExcept,
+                'jsonMessageOnly' => $this->rbacJsonMessageOnly
             ]
         ];
     }

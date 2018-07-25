@@ -6,7 +6,7 @@ use yii\web\HttpException;
 
 class RbacFilter extends ActionFilter
 {
-    public $except = [];
+    public $jsonMessageOnly = [];
 
     public function beforeAction($action)
     {
@@ -47,6 +47,15 @@ class RbacFilter extends ActionFilter
         if (\Yii::$app->user->can($prefix . '/*') || \Yii::$app->user->can($prefix . '/'. $action)) {
             return true;
         } else {
+
+            if (in_array($action, $this->jsonMessageOnly)) {
+                $response = \Yii::$app->response;
+                $response->format = \yii\web\Response::FORMAT_JSON;
+                $response->data = ['status' => 202, 'msg' => '访问受限!'];
+                $response->send();
+                exit();
+            }
+
             throw new HttpException(503, \Yii::t('ace', 'Sorry, you do not have permission to access this page!'));
         }
     }

@@ -2,8 +2,7 @@
 
 namespace kordar\ace\models\menu;
 
-use Yii;
-use kordar\ace\web\helper\SidebarHelper;
+use kordar\ace\models\admin\Admin;
 use kordar\ace\web\libs\tree\GenerateTreeByArray;
 use kordar\ace\web\libs\tree\MenuIterator;
 use kordar\ace\models\Ace;
@@ -42,7 +41,7 @@ class Menu extends Ace
             'class' => BlameableBehavior::className(),
             'createdByAttribute' => 'language',
             'updatedByAttribute' => 'language',
-            'value' => Yii::$app->language
+            'value' => \Yii::$app->language
         ];
         return $behaviors;
     }
@@ -68,42 +67,74 @@ class Menu extends Ace
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('ace.menu', 'ID'),
-            'title' => Yii::t('ace.menu', 'Title'),
-            'href' => Yii::t('ace.menu', 'Href'),
-            'parent_id' => Yii::t('ace.menu', 'Parent ID'),
-            'language' => Yii::t('ace.menu', 'Language'),
-            'icon' => Yii::t('ace.menu', 'Icon'),
-            'active' => Yii::t('ace.menu', 'Active'),
-            'sort' => Yii::t('ace.menu', 'Sort'),
-            'status' => Yii::t('ace.menu', 'Status'),
-            'hidden' => Yii::t('ace.menu', 'Hidden'),
-            'created_at' => Yii::t('ace.menu', 'Created At'),
-            'updated_at' => Yii::t('ace.menu', 'Updated At'),
+            'id' => \Yii::t('ace.menu', 'ID'),
+            'title' => \Yii::t('ace.menu', 'Title'),
+            'href' => \Yii::t('ace.menu', 'Href'),
+            'parent_id' => \Yii::t('ace.menu', 'Parent ID'),
+            'language' => \Yii::t('ace.menu', 'Language'),
+            'icon' => \Yii::t('ace.menu', 'Icon'),
+            'active' => \Yii::t('ace.menu', 'Active'),
+            'sort' => \Yii::t('ace.menu', 'Sort'),
+            'status' => \Yii::t('ace.menu', 'Status'),
+            'hidden' => \Yii::t('ace.menu', 'Hidden'),
+            'created_at' => \Yii::t('ace.menu', 'Created At'),
+            'updated_at' => \Yii::t('ace.menu', 'Updated At'),
         ];
     }
 
-    // 设置 Tree
-    static public function sidebarTree()
+    static public function sidebarData()
     {
-        $data = self::find()->indexBy('id')->orderBy('sort DESC')->where(['language'=>Yii::$app->language])->asArray()->all();
-        $group = new GenerateTreeByArray();
-        self::setSidebarList();
-        return SidebarHelper::setTree($group->tree($data));
+        $dependency = new \yii\caching\DbDependency(['db'=>self::getDbSign(), 'sql'=>'SELECT MAX(updated_at) FROM {{%menu}}']);
+        return self::find()->cache(3600, $dependency)->indexBy('id')->orderBy('sort DESC')->where(['language'=>\Yii::$app->language])->asArray()->all();
     }
 
+    /**
+     * @return array
+     */
+    static public function sidebarTree()
+    {
+        /**
+         * @var $identity Admin
+         */
+        $identity = \Yii::$app->user->identity;
+
+        if ($identity === null) {
+            return [];
+        }
+
+        $isSuper = $identity->super();
+
+        $data = self::sidebarData();
+
+        $data = array_filter($data, function ($val) use($isSuper) {
+
+            if (!$isSuper && $val['href'] !== '' && !\Yii::$app->user->can($val['href'])) {
+                return false;
+            }
+
+            return true;
+        });
+
+        return (new GenerateTreeByArray())->tree($data);
+    }
+
+    /**
+     * @return array
+     */
     static public function setSidebarList()
     {
-        $data = self::find()->select(['id', 'title', 'hidden', 'parent_id'])->indexBy('id')->orderBy('sort DESC')->asArray()->all();
-        $group = new GenerateTreeByArray();
-        $tree = $group->tree($data);
+        $data = self::sidebarData();
+        $tree = (new GenerateTreeByArray())->treeAll($data);
+
         $sideBarTree = new \RecursiveIteratorIterator(new MenuIterator($tree), \RecursiveIteratorIterator::SELF_FIRST);
+
         $list = [];
         foreach ($sideBarTree as $item) {
             $prefix = str_repeat('　', $sideBarTree->getDepth()) . '┗';
             $list[$item['id']] = $prefix . ' ' . $item['title'];
         }
-        return SidebarHelper::setSidebarDropDownList($list);
+
+        return $list;
     }
 
 }

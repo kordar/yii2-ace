@@ -12,6 +12,7 @@ class Sidebar extends Widget
 
     public function run()
     {
+
         $sideBarTree = new GenerateMenuByTree(new MenuIterator($this->tree), \RecursiveIteratorIterator::SELF_FIRST);
 
         $sideBarTree->linker = $this->link;

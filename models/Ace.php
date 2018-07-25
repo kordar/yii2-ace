@@ -8,7 +8,13 @@ class Ace extends ActiveRecord
 {
     public static function getDb()
     {
-        return \Yii::$app->get('ace', false) == null ? \Yii::$app->get('db') : \Yii::$app->get('ace');
+        $sign = self::getDbSign();
+        return \Yii::$app->get($sign);
+    }
+
+    public static function getDbSign()
+    {
+        return \Yii::$app->get('ace', false) === null ? 'db' : 'ace';
     }
 
     /**

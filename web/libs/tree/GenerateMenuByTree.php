@@ -45,11 +45,16 @@ class GenerateMenuByTree extends \RecursiveIteratorIterator
             $li = '<li>';
         }
 
+        $href = '#';
+        if (!empty($node['href'])) {
+            $href = ['/' . $node['href']];
+        }
+
         if ($isChildren) {
-            $a = Html::a("<i class=\"menu-icon fa {$node['icon']}\"></i><span class=\"menu-text\"> {$node['title']} </span><b class=\"arrow fa fa-angle-down\"></b>", ['/' . $node['href']], ['class'=>'dropdown-toggle']);
+            $a = Html::a("<i class=\"menu-icon fa {$node['icon']}\"></i><span class=\"menu-text\"> {$node['title']} </span><b class=\"arrow fa fa-angle-down\"></b>", $href, ['class'=>'dropdown-toggle']);
             return $li . $a . "<b class=\"arrow\"></b>";
         } else {
-            $a = Html::a("<i class=\"menu-icon fa {$node['icon']}\"></i><span class=\"menu-text\"> {$node['title']} </span>",['/' . $node['href']]);
+            $a = Html::a("<i class=\"menu-icon fa {$node['icon']}\"></i><span class=\"menu-text\"> {$node['title']} </span>", $href);
             return $li . $a . "<b class=\"arrow\"></b></li>";
         }
     }

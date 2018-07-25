@@ -44,13 +44,55 @@ class GenerateTreeByArray
     {
         $root = [];
         foreach ($levelsNode as $key => $node) {
-            $root[$key] = $node;
             $nodeID = $node['id'];
+
+            $children = [];
             if (isset($this->groups[$nodeID])) {
                 $children = $this->generateTree($this->groups[$nodeID]);
-                $root[$key]['children'] = $children;
             }
+
+            if (empty($node['href']) && empty($children)) {
+                continue;
+            }
+
+            $root[$key] = $node;
+            $root[$key]['children'] = $children;
         }
         return $root;
     }
+
+
+    public function treeAll($list = [], $options = [])
+    {
+        $this->setGroup($list);
+        $rootKey = isset($options['rootKey']) ? $options['rootKey'] : 0;
+        $tree = [];
+
+        if (isset($this->groups[$rootKey])) {
+            $rootNodes = $this->groups[$rootKey];
+            $tree = $this->generateTreeAll($rootNodes);
+        }
+
+        return $tree;
+    }
+
+    // 生成树
+    protected function generateTreeAll($levelsNode = [])
+    {
+        $root = [];
+        foreach ($levelsNode as $key => $node) {
+            $nodeID = $node['id'];
+
+            $children = [];
+            if (isset($this->groups[$nodeID])) {
+                $children = $this->generateTreeAll($this->groups[$nodeID]);
+            }
+
+            $root[$key] = $node;
+            $root[$key]['children'] = $children;
+        }
+        return $root;
+    }
+
+
 }

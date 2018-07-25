@@ -1,7 +1,7 @@
 <?php
 namespace kordar\ace\controllers;
 
-use kordar\upload\SingleUploadFile;
+use kordar\upload\ScsUploadFile;
 
 /**
  * Class DefaultController
@@ -11,6 +11,7 @@ use kordar\upload\SingleUploadFile;
 class DefaultController extends AceController
 {
     protected $rbacExcept = ['error'];
+    protected $rbacJsonMessageOnly = ['upload'];
 
     public function actions()
     {
@@ -19,8 +20,9 @@ class DefaultController extends AceController
                 'class' => 'yii\web\ErrorAction',
             ],
             'upload' => [
-                'class' => SingleUploadFile::className(),
-                'category' => 'test',
+                'class' => ScsUploadFile::className(),
+                'name' => 'SingleUploadForm[file]',
+                'bucket' => 'res-001',
                 'autoSubDateRoot' => 'Y/m/d'
             ]
         ];

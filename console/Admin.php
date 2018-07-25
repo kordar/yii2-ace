@@ -5,7 +5,7 @@ class Admin
 {
     public function createSuper($username, $password, $email = '')
     {
-        $admin = new \kordar\ace\models\Admin();
+        $admin = new \kordar\ace\models\admin\Admin();
         $email = empty($email) ? $username . '@ace.com' : $email;
         $admin->username = $username;
         $admin->email = $email;
