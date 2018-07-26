@@ -5,10 +5,7 @@ return [
     'modules' => [
         'ace' => [
             'class' => 'kordar\ace\Module',
-        ],
-        'rbac' => [
-            'class' => 'kordar\ace\modules\rbac\Module',
-        ],
+        ]
     ],
 
 

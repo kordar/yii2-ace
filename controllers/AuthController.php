@@ -122,6 +122,7 @@ class AuthController extends AceController
      * @param $token
      * @return string|\yii\web\Response
      * @throws BadRequestHttpException
+     * @item reset-password:重置密码
      */
     public function actionResetPassword($token)
     {
