@@ -15,7 +15,10 @@ $this->params['link'] = 'ace/rbac/permissions';
 
 <div class="auth-item-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+        'title' => Html::encode($this->title),
+        'small' => Yii::t('ace', 'Grid Update')
+    ])?>
 
     <?= $this->render('../_form', [
         'model' => $model,

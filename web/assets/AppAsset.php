@@ -21,8 +21,9 @@ class AppAsset extends AssetBundle
     ];
 
     public $depends = [
+        'yii\web\YiiAsset',
         'kordar\ace\web\assets\AceAsset',
         //'kordar\ace\web\assets\plugins\JqueryUIAsset',
-        'kordar\ace\web\assets\AceScriptAsset'
+        'kordar\ace\web\assets\AceScriptAsset',
     ];
 }

@@ -1,10 +1,14 @@
 <?php
 namespace kordar\ace\web\helper;
 
-use kordar\ace\web\libs\ItemsToGroup;
-use yii\helpers\ArrayHelper;
 use yii\rbac\Role;
+use yii\helpers\ArrayHelper;
+use kordar\ace\web\libs\ItemsToGroup;
 
+/**
+ * Class RbacHelper
+ * @package kordar\ace\web\helper
+ */
 class RbacHelper
 {
     /**

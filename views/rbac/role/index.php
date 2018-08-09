@@ -13,11 +13,13 @@ $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-list'];
 ?>
 <div class="auth-item-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+        'title' => Html::encode($this->title),
+        'small' => Yii::t('ace', 'Create') . ' &amp; ' .  Yii::t('ace', 'Edit') . ' &amp; ' . Yii::t('ace', 'Assign')
+    ])?>
 
     <p>
-        <?= Html::a(Yii::t('ace.rbac', Html::tag('span', '', ['class'=>'fa fa-group']) . ' {title}', ['title'=>Yii::t('ace.rbac', 'Create Role')]), ['create-role'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('ace.rbac', Html::tag('span', '', ['class'=>'fa fa-group']) . ' {title}', ['title'=>Yii::t('ace.rbac', 'Create Role')]), ['create-role'], ['class' => 'btn btn-success btn-sm']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

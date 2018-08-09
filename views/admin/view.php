@@ -14,7 +14,10 @@ $this->params['link'] = 'ace/admin/index';
 ?>
 <div class="admin-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+        'title' => Html::encode($this->title),
+        'small' => Yii::t('ace', 'Grid View')
+    ])?>
 
     <p>
         <?= Html::a(Yii::t('yii', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

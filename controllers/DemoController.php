@@ -25,6 +25,10 @@ class DemoController extends Controller
         return $this->render('index');
     }
 
+    /**
+     * @return string
+     * @item elements:组件元素
+     */
     public function actionElements()
     {
         return $this->render('element');

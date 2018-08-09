@@ -3,6 +3,7 @@
 namespace kordar\ace\controllers;
 
 use Yii;
+use yii\base\UserException;
 use yii\helpers\Html;
 use kordar\ace\models\admin\EditForm;
 use kordar\ace\models\admin\SignupForm;
@@ -114,7 +115,13 @@ class AdminController extends AceController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if ($model->type == Admin::TYPE_SUPER) {
+            throw new UserException(Yii::t('ace', 'superuser does not allow deletion'));
+        }
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }

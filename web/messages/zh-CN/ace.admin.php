@@ -28,6 +28,9 @@ return [
     'Admin Assign' => '管理员权限分配',
 
 
-    'Confirm Password' => '重复密码'
+    'Confirm Password' => '重复密码',
+
+    'Edit' => '编辑',
+    'Assign' => '权限分配',
 
 ];
