@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kordar\ace\models\admin\Admin;
 
 /* @var $this yii\web\View */
 /* @var $model kordar\ace\models\menu\MenuSearch */
@@ -21,13 +22,13 @@ use yii\widgets\ActiveForm;
         ]
     ]); ?>
 
-    <?= \kordar\ace\web\widgets\search\DropDownSearch::widget(['model' => $model, 'items' => [
-            'id', 'name', 'username', 'email'
-    ]])?>
+    <?= \kordar\ace\web\widgets\search\DropDownSearch::widget(['model' => $model, 'items' => ['id', 'name', 'username', 'email']])?>
 
-    <?= $form->field($model, 'status', ['template'=>"{input}"])->dropDownList(\kordar\ace\models\admin\Admin::statusList(), ['prompt'=>'管理员状态']) ?>
+    <?= \kordar\ace\web\widgets\search\DropDownDateSearch::widget(['model' => $model, 'items' => ['created_at']])?>
 
-    <?= $form->field($model, 'type', ['template'=>"{input}"])->dropDownList(\kordar\ace\models\admin\Admin::typeList(), ['prompt'=>'管理员类型']) ?>
+    <?= $form->field($model, 'status', ['template'=>"{input}"])->dropDownList(Admin::statusList(), ['prompt'=>'管理员状态']) ?>
+
+    <?= $form->field($model, 'type', ['template'=>"{input}"])->dropDownList(Admin::typeList(), ['prompt'=>'管理员类型']) ?>
 
     <div class="form-group">
         <?= Html::submitButton('<i class="ace-icon fa fa-search bigger-110"></i> ' . Yii::t('ace', 'Search'), ['class' => 'btn btn-primary btn-sm']) ?>

@@ -107,4 +107,10 @@ class GridViewHelper
         return GridViewHelper::button($arguments[0]);
     }
 
+    static public function autoColorLabel($key, $val)
+    {
+        $class = ['alert-success', 'alert-info', 'alert-warning', 'alert-danger'];
+        return empty($val) ? '<i>[未定义]</i>' : Html::tag('i', $val, ['class' => $class[$key % 4]]);
+    }
+
 }
