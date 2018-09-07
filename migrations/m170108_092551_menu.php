@@ -30,16 +30,13 @@ class m170108_092551_menu extends Migration
 
         ], $tableOptions);
 
-        $table = self::TABLE;
-        $view = '{{%menu_view}}';
-        $sql = <<<SQL
-          CREATE VIEW $view AS 
-          SELECT $table.*, `menu2`.`parent_title` 
-            FROM $table LEFT JOIN 
-              (SELECT `title` AS `parent_title`, `id` FROM $table) `menu2` 
-              ON `menu2`.`id` = `parent_id`;
-SQL;
-        $this->db->createCommand($sql)->execute();
+        try {
+            $this->db->createCommand('CREATE VIEW :view AS SELECT `menu1`.*, `menu2`.`title` AS `parent_title` FROM :table menu1 LEFT JOIN :table menu2 ON `menu2`.`id`=`menu1`.`parent_id`', [
+                ':view' => '{{%menu_view}}', ':table' => self::TABLE
+            ])->execute();
+        } catch (\Exception $e) {
+            echo '视图 menu_view 创建失败！' . PHP_EOL;
+        }
 
     }
 

@@ -1,6 +1,7 @@
 <?php
 namespace kordar\ace\web\widgets;
 
+use kordar\ace\models\admin\Admin;
 use yii\base\Widget;
 
 class Navbar extends Widget
@@ -12,7 +13,7 @@ class Navbar extends Widget
     {
         return $this->render('navbar/header', [
             'tools'=> [
-                'tasks'=>$this->tasks()
+                // 'tasks'=>$this->tasks()
             ],
             'personal' => $this->personal()
         ]);
@@ -35,7 +36,12 @@ class Navbar extends Widget
 
     protected function personal()
     {
-        return $this->render('navbar/personal', ['baseUrl'=>$this->baseUrl]);
+        /**
+         * @var $identity Admin
+         */
+        $identity = \Yii::$app->user->identity;
+
+        return $this->render('navbar/personal', ['avatar' => $identity->getAvatar($this->baseUrl), 'name' => $identity->getName()]);
     }
 
 }

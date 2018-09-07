@@ -14,7 +14,10 @@ $this->params['link'] = 'ace/rbac/roles';
 ?>
 <div class="auth-item-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+        'title' => Html::encode($this->title),
+        'small' => Yii::t('ace', 'Grid Update')
+    ])?>
 
     <p>
         <?= Html::a(Yii::t('yii', 'Update'), ['update-role', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>

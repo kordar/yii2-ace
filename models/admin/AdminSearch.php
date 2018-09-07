@@ -2,7 +2,7 @@
 
 namespace kordar\ace\models\admin;
 
-use yii\base\Model;
+use kordar\ace\web\traits\SearchTrait;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -10,24 +10,18 @@ use yii\data\ActiveDataProvider;
  */
 class AdminSearch extends Admin
 {
+
+    use SearchTrait;
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'status', 'created_at', 'updated_at', 'type'], 'integer'],
-            [['name', 'avatar', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'email'], 'safe'],
+            [['status', 'type'], 'integer'],
+            [['dropDownSearch', 'dropDownSearchInput', 'dropDownSearchExt', 'dropDownSearchBetweenData', 'dropDownSearchBetweenDataStart', 'dropDownSearchBetweenDataEnd'], 'safe'],
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
     }
 
     /**
@@ -55,22 +49,24 @@ class AdminSearch extends Admin
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
-            'type' => $this->type,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
+        if (!empty($this->dropDownSearchBetweenDataStart) && !empty($this->dropDownSearchBetweenDataEnd)) {
+            $query->andFilterWhere(['between', $this->dropDownSearchBetweenData, strtotime($this->dropDownSearchBetweenDataStart), strtotime($this->dropDownSearchBetweenDataEnd)]);
+        }
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'avatar', $this->avatar])
-            ->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email', $this->email]);
+        if (!empty($this->dropDownSearch)) {
+
+            if ($this->dropDownSearchExt == 'EQ') {
+                $query->andFilterWhere([$this->dropDownSearch => $this->dropDownSearchInput]);
+            }
+
+            if ($this->dropDownSearchExt == 'LIKE') {
+                $query->andFilterWhere(['like', $this->dropDownSearch, $this->dropDownSearchInput]);
+            }
+
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere(['status' => $this->status, 'type' => $this->type]);
 
         return $dataProvider;
     }

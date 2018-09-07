@@ -11,13 +11,22 @@ use kordar\ace\web\helper\GridViewHelper;
 $this->title = Yii::t('ace.admin', 'Admins');
 $this->params['breadcrumbs'][] = ['label' => $this->title, 'icon' => 'fa-users']
 ?>
+
 <div class="admin-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+            'title' => $this->title,
+            'small' => Yii::t('ace.admin', 'Edit') . ' &amp; ' . Yii::t('ace.admin', 'Assign')
+    ]) ?>
 
     <p>
-        <?= Html::a(Yii::t('ace.admin', 'Create Admin'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="ace-icon fa fa-plus-circle bigger-110"></i> ' . Yii::t('ace.admin', 'Create Admin'), ['create'], ['class' => 'btn btn-success btn-sm']) ?>
+    </p>
+
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?php // Html::a(Yii::t('ace.admin', 'Create Admin'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

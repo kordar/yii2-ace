@@ -25,9 +25,6 @@ class AuthController extends AceController
     // layout
     public $layout = 'login';
 
-    // acl validation is not included
-    protected $except = ['login', 'signup', 'request-password-reset', 'reset-password', 'error'];
-
     // rbac validation is not included
     protected $rbacExcept = ['login', 'signup', 'request-password-reset', 'reset-password', 'error'];
 

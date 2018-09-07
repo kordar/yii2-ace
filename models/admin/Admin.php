@@ -1,12 +1,12 @@
 <?php
 namespace kordar\ace\models\admin;
 
-use kordar\ace\web\helper\ActiveFormHelper;
 use Yii;
 use kordar\ace\models\Ace;
+use yii\web\IdentityInterface;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
-use yii\web\IdentityInterface;
+use kordar\ace\web\helper\ActiveFormHelper;
 
 /**
  * User model
@@ -26,6 +26,8 @@ use yii\web\IdentityInterface;
  */
 class Admin extends Ace implements IdentityInterface
 {
+    use PersonalTrait;
+
     public $status_name;
     public $type_name;
 

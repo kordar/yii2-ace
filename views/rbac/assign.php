@@ -21,7 +21,10 @@ $this->params['link'] = 'ace/rbac/roles';
 ?>
 <div class="role-create">
 
-    <h1><?= Html::encode($this->title) ?> <small><?= $name; ?></small></h1>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+        'title' => Html::encode($this->title),
+        'small' => Html::tag('b', '[' . $name . '] ') . Yii::t('ace', 'Assign')
+    ])?>
 
     <div class="role-form">
 

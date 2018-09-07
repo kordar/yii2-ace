@@ -28,3 +28,12 @@
     border: dashed 1px;
     margin: 8px 0px;
 }
+
+.form-inline .form-group {
+    padding-bottom: 5px;
+}
+
+ul.pagination {
+    margin: 0;
+    padding: 0;
+}

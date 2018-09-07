@@ -24,7 +24,10 @@ $this->params['link'] = 'ace/admin/index';
 
 <div class="role-create">
 
-    <h1><?= Html::tag('span', '', ['class'=>'alert-success']) . Html::encode($this->title) ?></h1>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+        'title' => Html::encode($this->title),
+        'small' => Html::tag('b', '[' . $name . '] ') . Yii::t('ace', 'Assign')
+    ])?>
 
     <div class="role-form">
 

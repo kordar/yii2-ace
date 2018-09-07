@@ -14,8 +14,14 @@ return [
     'No' => '否',
 
     'Create' => '创建',
+    'Edit' => '编辑',
     'Update' => '更新',
     'Submit' => '提交',
+    'Search' => '查询',
+    'Reset' => '重置',
+    'Assign' => '权限分配',
+
+    'Welcome' => '欢迎',
 
     'Grid View' => '查看',
     'Grid Update' => '编辑',
@@ -27,5 +33,7 @@ return [
     'The password is inconsistent twice' => '两次密码不一致',
 
     'Sorry, you do not have permission to access this page!' => '抱歉，您无权访问此页面！',
+
+    'superuser does not allow deletion' => '超级管理员不容许删除'
 
 ];

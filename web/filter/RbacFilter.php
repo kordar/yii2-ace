@@ -10,39 +10,28 @@ class RbacFilter extends ActionFilter
 
     public function beforeAction($action)
     {
-        if (!parent::beforeAction($action)) {
-            return false;
+        if ($this->isActive($action)) {
+
+            $user = \Yii::$app->user;
+
+            if ($user !== null && $user->getIsGuest()) {
+                $user->loginRequired();
+                return false;
+            }
+
+            if ($user->identity->super()) {
+                return true;
+            }
+
+            return $this->canPass($action->controller->module->id, $action->controller->id, $action->id);
         }
 
-        if (in_array($action->id, $this->except) || $this->isSuper()) {
-            return true;
-        }
-
-        return $this->canPass($action->controller->module->id, $action->controller->id, $action->id);
-    }
-
-    private function setAuthKey($userId, $super = false)
-    {
-        $auth = \Yii::$app->authManager;
-        $data = ($super === false) ? $auth->getPermissionsByUser($userId) : $auth->getPermissions();
-        \Yii::$app->params['authKeys'] = array_keys($data);
         return true;
-    }
-
-    private function isSuper()
-    {
-        /**
-         * @var \kordar\ace\models\admin\Admin $identity
-         */
-        $identity = \Yii::$app->user->identity;
-        $super = ($identity !== null) ? $identity->super() : false;
-        $this->setAuthKey($identity->getId(), $super);
-        return $super;
     }
 
     private function canPass($module, $controller, $action)
     {
-        $prefix = $module == 'basic' ? $controller : $module . '/' . $controller;
+        $prefix = $module == \Yii::$app->id ? $controller : $module . '/' . $controller;
 
         if (\Yii::$app->user->can($prefix . '/*') || \Yii::$app->user->can($prefix . '/'. $action)) {
             return true;

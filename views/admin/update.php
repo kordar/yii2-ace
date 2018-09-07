@@ -15,7 +15,10 @@ $this->params['link'] = 'ace/admin/index';
 ?>
 <div class="admin-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <?= \kordar\ace\web\widgets\page\PageHeader::widget([
+        'title' => Html::encode($this->title),
+        'small' => Yii::t('ace', 'Grid Update')
+    ])?>
 
     <div class="admin-form well">
 
