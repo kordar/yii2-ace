@@ -18,7 +18,7 @@ class AutoPermission
         {
             $controller = $file->getFilename();
             $match = [];
-            preg_match("/([a-zA-Z]+)Controller\.php/", $controller, $match);
+            preg_match("/([a-zA-Z0-9]+)Controller\.php/", $controller, $match);
             $class = lcfirst($match[1]);
 
             if ($class == 'ace') {

@@ -21,9 +21,9 @@ class DefaultController extends AceController
             ],
             'upload' => [
                 'class' => ScsUploadFile::className(),
-                'name' => 'SingleUploadForm[file]',
-                'bucket' => 'res-001',
-                'autoSubDateRoot' => 'Y/m/d'
+                'name' => 'editormd-image-file',
+                'bucket' => 'yii-study',
+                'category' => 'discuss/' . date('Ymd')
             ]
         ];
     }
