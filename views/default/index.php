@@ -25,7 +25,7 @@ $model = new \kordar\ace\models\admin\Admin();
     <?= $form->field($model, 'avatar')->widget(\kordar\editormd\EditorMd::className(), [
         'id' => 'quick-start', 'assetClassName' => 'kordar\ace\web\assets\EditorMdAsset',
         'editorOptions' => [
-           'uploadUrl' => \yii\helpers\Url::to(['/site/upload']),
+           'imageUploadURL' => \yii\helpers\Url::to(['/ace/default/upload']),
         ]
     ])
     ?>

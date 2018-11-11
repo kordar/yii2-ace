@@ -12,11 +12,9 @@ use yii\web\Controller;
  */
 class AceController extends Controller
 {
-    protected $actions = ['*'];
-    protected $except = [];
+
     protected $rbacExcept = [];
     protected $rbacJsonMessageOnly = [];
-    protected $mustLogin = [];
 
     protected $verbs = [
         'delete' => ['POST']
@@ -25,24 +23,6 @@ class AceController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                // 'user' => 'user',
-                'only' => $this->actions,
-                'except' => $this->except,
-                'rules' => [
-                    [
-                        'allow' => false,
-                        'actions' => $this->mustLogin,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'allow' => true,
-                        'actions' => $this->mustLogin,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => $this->verbs,
