@@ -2,6 +2,7 @@
 namespace kordar\ace\console;
 
 use Yii;
+use yii\helpers\Url;
 
 class AutoPermission
 {
@@ -18,12 +19,16 @@ class AutoPermission
         {
             $controller = $file->getFilename();
             $match = [];
-            preg_match("/([a-zA-Z]+)Controller\.php/", $controller, $match);
+            preg_match("/([a-zA-Z0-9]+)Controller\.php/", $controller, $match);
             $class = lcfirst($match[1]);
 
             if ($class == 'ace') {
                 continue;
             }
+
+            $class = preg_replace_callback('/[A-Z]/', function($mclass){
+                return '-' . strtolower($mclass[0]);
+            }, $class);
 
             $namespace = empty($module) ? $class : $module . '/' . $class;
 

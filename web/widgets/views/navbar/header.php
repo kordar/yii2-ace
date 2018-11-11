@@ -11,12 +11,9 @@
         </button>
 
         <div class="navbar-header pull-left">
-            <a href="index.html" class="navbar-brand">
-                <small>
-                    <i class="fa fa-leaf"></i>
-                    Ace Admin
-                </small>
-            </a>
+
+            <?= \yii\helpers\Html::a('<small><i class="fa fa-leaf"></i> ' . \Yii::$app->params["webTitle"] . '</small>', \Yii::$app->getHomeUrl(), ['class'=>'navbar-brand'])?>
+
         </div>
 
         <div class="navbar-buttons navbar-header pull-right" role="navigation">
