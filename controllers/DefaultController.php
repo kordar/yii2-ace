@@ -1,6 +1,7 @@
 <?php
 namespace kordar\ace\controllers;
 
+use kordar\upload\AliYunOss;
 use kordar\upload\ScsUploadFile;
 
 /**
@@ -19,12 +20,22 @@ class DefaultController extends AceController
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+
             'upload' => [
-                'class' => ScsUploadFile::className(),
-                'name' => 'editormd-image-file',
-                'bucket' => 'yii-study',
-                'category' => 'discuss/' . date('Ymd')
+                'class' => AliYunOss::className(),
+                'name' => 'SingleUploadForm[file]',
+                'bucket' => 'img-plant',
+                'extensions' => 'txt',
+                'category' => 'test',
+                //'extensions' => 'svga'
             ]
+
+//            'upload' => [
+//                'class' => ScsUploadFile::className(),
+//                'name' => 'SingleUploadForm[file]',
+//                'bucket' => 'res-001',
+//                'autoSubDateRoot' => 'Y/m/d'
+//            ]
         ];
     }
 

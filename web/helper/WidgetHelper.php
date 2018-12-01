@@ -13,9 +13,9 @@ class WidgetHelper
         return empty($value) ? null : "\$('#{$id}').ace_file_input('show_file_list', ['{$value}'])";
     }
 
-    public static function showWellJs($id, $value)
+    public static function showWellJs($id, $value, $name = '')
     {
-        return empty($value)? null : "\$(\"#{$id}\").ace_file_input(\"show_file_list\",[{type:\"image\",name:\"{name}\",path:\"{path}\"}]);";
+        return empty($value)? null : "\$(\"#{$id}\").ace_file_input(\"show_file_list\",[{type:\"image\",name:\"{$name}\",path:\"{$value}\"}]);";
     }
 
     public static function getOptions($options = [])
