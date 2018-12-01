@@ -5,5 +5,5 @@ use yii\web\AssetBundle;
 
 class AceBundleAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/aceadmin/assets/';
+    public $sourcePath = '@kordar/ace/assets/ace/assets';
 }

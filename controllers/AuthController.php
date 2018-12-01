@@ -23,7 +23,7 @@ use yii\web\BadRequestHttpException;
 class AuthController extends AceController
 {
     // layout
-    public $layout = 'login';
+    public $layout = 'auth';
 
     // rbac validation is not included
     protected $rbacExcept = ['login', 'signup', 'request-password-reset', 'reset-password', 'error'];
@@ -51,8 +51,10 @@ class AuthController extends AceController
             return $this->goBack();
         }
 
-        return $this->render('login', [
-            'model' => $model
+        $render = isset(\Yii::$app->params['render']['auth']) ? \Yii::$app->params['render']['auth'] : 'login';
+
+        return $this->render($render, [
+            'model' => $model, 'bg' => isset(\Yii::$app->params['render']['auth-bg']) ? \Yii::$app->params['render']['auth-bg'] : ''
         ]);
     }
 

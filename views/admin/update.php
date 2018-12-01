@@ -27,6 +27,7 @@ $this->params['link'] = 'ace/admin/index';
         <?= $form->field($model, 'name')->textInput() ?>
         <?= $form->field($model, 'username')->textInput(['readonly' => true]) ?>
         <?= $form->field($model, 'email')->textInput() ?>
+        <?= $form->field($model, 'password')->textInput() ?>
 
         <div class="form-group">
             <?= Html::submitButton(Yii::t('ace', 'Update'), ['class' => 'btn btn-primary']) ?>

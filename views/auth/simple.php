@@ -70,40 +70,7 @@ $this->registerCss($css);
 
             <?php ActiveForm::end(); ?>
 
-            <div class="social-or-login center">
-                <span class="bigger-110"><?= Yii::t('ace.login', 'Or Login Using')?></span>
-            </div>
-
-            <div class="space-6"></div>
-
-            <div class="social-login center">
-                <a class="btn btn-danger">
-                    <i class="ace-icon fa fa-qq"></i>
-                </a>
-
-                <a class="btn btn-success">
-                    <i class="ace-icon fa fa-wechat"></i>
-                </a>
-
-            </div>
         </div><!-- /.widget-main -->
 
-        <div class="toolbar clearfix">
-            <div>
-                <?= Html::a(
-                    "<i class=\"ace-icon fa fa-arrow-left\"></i>\n" . Yii::t('ace.login', 'I forgot my password'),
-                    ['auth/request-password-reset'],
-                    ['class'=>'forgot-password-link']
-                ) ?>
-            </div>
-
-            <div>
-                <?= Html::a(
-                    Yii::t('ace.login', 'I want to register') . "\n<i class=\"ace-icon fa fa-arrow-right\"></i>",
-                    ['auth/signup'],
-                    ['class'=>'user-signup-link']
-                ) ?>
-            </div>
-        </div>
     </div><!-- /.widget-body -->
 </div><!-- /.login-box -->
